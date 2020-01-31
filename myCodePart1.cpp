@@ -285,8 +285,12 @@ consoleOutput()
     cout << std::setw(15) << right << mult3 << endl;
 
     //F using setfill to put leading zeroes in
-    cout << std::setfill('0') << mult2;
-
+    //  TODO:: FIX THIS BUSTED SHIT 
+    /*
+    cout << std::setfill('0') << mult1 << endl;
+    cout << std::setfill('0') << mult2 << endl;
+    cout << std::setfill('0') << mult3 << endl;
+    */
 
 
 
@@ -299,6 +303,22 @@ consoleOutput()
 void
 operations()
 {
+  //A this is section for performing operations 
+  float totalPossible = 10.11, totalEarned = 20.32; 
+  float percentage = totalEarned / totalPossible;
+  cout << percentage << endl;
+
+  //B this is a section for adding two integers, dividing them, then displaying them as a float. 
+  float div1 = 20, div2 = 13; 
+  float divTotal = (div2 + div2) / div1;
+  cout << divTotal << endl;
+
+  //C this is for calculating the net income, revenue over total expenses 
+  float revenues = 200000, computerExpenses = 10000, salaries = 50000, utilities = 5000, taxes = 2500; 
+  float revenueEquationResult = revenues / (computerExpenses + salaries + utilities + taxes);
+
+  //D TODO: figure out what chrissy actually wants for this part 
+
   cout << "end of operations" << endl;
   cin.get();
 }
@@ -306,6 +326,68 @@ operations()
 void
 decisions()
 {
+  //A this tells us what grade we got
+  float totalPossible = 99.99, totalEarned = 80.32; 
+  float grade = totalEarned / totalPossible;
+
+  std::string letterGrade; 
+  //formatted as >= lesser percentage, <= larger percentage
+  if(grade >= 93 && grade <= 100 )
+  {
+    letterGrade = "A";
+  }
+  else if(grade >= 90 && grade <= 92.99) 
+  {
+    letterGrade = "A-";
+  }
+  else if(grade >= 87 && grade <= 89.99)
+  {
+    letterGrade = "B+";
+  }
+  else if(grade >= 83 && grade <= 86.99)
+  {
+    letterGrade = "B";
+  }
+  else if(grade >= 80 && grade <= 82.99)
+  {
+    letterGrade = "B";
+  }
+  else if(grade >= 77 && grade <= 79.99)
+  {
+    letterGrade = "C+";
+  }
+  else if(grade >= 73 && grade <= 76.99)
+  {
+    letterGrade = "C";
+  }
+  //else if(grade )
+  cout << "Letter grade is " << letterGrade << endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   cout << "end of decisions" << endl;
   cin.get();
 }
