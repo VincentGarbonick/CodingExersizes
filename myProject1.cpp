@@ -68,31 +68,48 @@ int main(void)
             { 
                 while(validWeight == false)
                 {
-                cout << setw(TEXTMARGIN) << "Enter your weight: ";
-                cin >> weight;
-                cout << endl;
-                cin.ignore(); 
-                if(!cin.fail() && weight <= 999 && weight >= 1)
-                {
-                    //secondary input validation block
-                    validWeight = true; //breaks weight validation while loop
-                    cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
-                    cin >> minutes;
-                    minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
-                    cout <<endl;
-                    cin.ignore();
-                    validMins = true; //breaks minute validation while loop
-
+                    cout << setw(TEXTMARGIN) << "Enter your weight: ";
+                    cin >> weight;
+                    cout << endl;
+                    cin.ignore(); 
                     
-                }
-                else
-                {
-                    //error handling for primary while loop
-                    cout << setw(2) << "That is not valid input, pick weight between 1 and 999" << "\n" << endl; 
-                    cin.clear(); //clears error state of cin
-                    cin.ignore(); //flushes input buffer
-                    cout << endl; //flushes output buffer
-                }
+                    if(!cin.fail() && weight <= 999 && weight >= 1)
+                    {
+                        //secondary input validation block
+                        validWeight = true; //breaks weight validation while loop
+                        
+                        while(validMins == false)
+                        {
+                            cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
+                            cin >> minutes;
+                            cout <<endl;
+                            cin.ignore();
+                            
+                            if(!cin.fail() && weight <= 999 && weight >= 1)
+                            {
+                                validMins = true; //breaks minute validation while loop
+                                minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+
+                            }
+                            else 
+                            {
+                                //error handling for minute while loop
+                                cout << setw(2) << "The minutes must be between 30 and 60" << "\n" << endl; 
+                                cin.clear(); //clears error state of cin
+                                cin.ignore(); //flushes input buffer
+                                cout << endl; //flushes output buffer
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        //error handling for weight while loop
+                        cout << setw(2) << "That is not valid input, pick weight between 1 and 999" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore(); //flushes input buffer
+                        cout << endl; //flushes output buffer
+                    }
                 };
 
 
