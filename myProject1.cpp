@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 
+#define TEXTMARGIN 2
+
 using std::cin; 
 using std::cout;
 using std::setw;
@@ -52,8 +54,8 @@ int main(void)
 
 
         //polls for user input 
-        cin.clear(); //clears error signal if cin failed before program looped again
-        cout << setw(2) <<  "Enter the workout that you wish to track, or end to exit: " << endl;
+        //cin.clear(); //clears error signal if cin failed before program looped again
+        cout << setw(TEXTMARGIN) <<  "Enter the workout that you wish to track, or end to exit: " << endl;
         cin >> userChoice; 
         cin.ignore();
 
@@ -64,18 +66,34 @@ int main(void)
             //under all if statements, all input is validated and held within an infinite while loop. It will lock you into the process until you input valid variables
             if(userChoice == 1)
             { 
-                cout << setw(2) << "Enter your weight: ";
+                cout << setw(TEXTMARGIN) << "Enter your weight: ";
                 cin >> weight;
                 cout << endl;
                 cin.ignore(); 
 
-                cout << setw(2) << "Enter minutes worked: "; 
+                cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
                 cin >> minutes;
+                minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
                 cout <<endl;
                 cin.ignore();
 
                 calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
                 cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt for biking was: " << calories << endl;
+
+                if(calories >= 0 && calories <= 200)
+                {
+                    cout << "light-intensity aerobic activity" << endl;
+                }
+                else if(calories >= 201 && calories <= 500)
+                {
+                    cout << "moderate-intensity activity" << endl;
+                }
+                else 
+                {
+                    cout << "vigerous-intesnity aerobic activity" << endl;
+                };
+
+                cout << "\n" << endl; //adds a nice little newline 
 
             };
 
@@ -83,8 +101,11 @@ int main(void)
         
         else
         {
+            //error handling for primary while loop
             cout << setw(2) << "That is not valid input, please follow the menu carefully." << "\n" << endl; 
             cin.clear(); //clears error state of cin
+            cin.ignore(); //flushes input buffer
+            cout << endl; //flushes output buffer
         };
 
 
@@ -93,7 +114,7 @@ int main(void)
 
 
         validLoop = false; //resets valid 
-        cin.ignore(); //flush output buffer one last time 
+        
         userChoice = 0; //resets userChoice 
     };
     return 0; 
