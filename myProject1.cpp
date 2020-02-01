@@ -66,16 +66,40 @@ int main(void)
             //under all if statements, all input is validated and held within an infinite while loop. It will lock you into the process until you input valid variables
             if(userChoice == 1)
             { 
+                while(validWeight == false)
+                {
                 cout << setw(TEXTMARGIN) << "Enter your weight: ";
                 cin >> weight;
                 cout << endl;
                 cin.ignore(); 
+                if(!cin.fail() && weight <= 999 && weight >= 1)
+                {
+                    //secondary input validation block
+                    validWeight = true; //breaks weight validation while loop
+                    cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
+                    cin >> minutes;
+                    minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+                    cout <<endl;
+                    cin.ignore();
+                    validMins = true; //breaks minute validation while loop
 
-                cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
-                cin >> minutes;
-                minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
-                cout <<endl;
-                cin.ignore();
+                    
+                }
+                else
+                {
+                    //error handling for primary while loop
+                    cout << setw(2) << "That is not valid input, pick weight between 1 and 999" << "\n" << endl; 
+                    cin.clear(); //clears error state of cin
+                    cin.ignore(); //flushes input buffer
+                    cout << endl; //flushes output buffer
+                }
+                };
+
+
+
+
+                
+
 
                 calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
                 cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt for biking was: " << calories << endl;
@@ -94,7 +118,7 @@ int main(void)
                 };
 
                 cout << "\n" << endl; //adds a nice little newline 
-
+                
             };
 
         }
@@ -114,9 +138,11 @@ int main(void)
 
 
         validLoop = false; //resets valid 
-        
+        validMins = false;
+        validWeight = false; //resets minute and weight validation loops
         userChoice = 0; //resets userChoice 
-    };
+   
+    };// main loop closing brace
     return 0; 
-
+    
 };
