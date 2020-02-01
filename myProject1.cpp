@@ -68,6 +68,22 @@ int main(void)
         cin >> userChoice; 
         cin.ignore();
         cout << endl;
+        
+        
+        /*
+        A breif documentation of how the loops work- basically the program constantly polls for user input during prompts. There are 3 loops. The first is an overall 
+        menu loop that does not exit until the user selects 5 is the first one. Once a user inputs an inital value, it gets validated using !cin.fail()
+        and a range system, there is a decision tree that prompts additionally based on user input. You may select values 1-4 for corresponding exeriszes, 
+        and 5 if you want to quit. 
+
+        There are 2 other sub while loops for validating weight and minute input. The minutes are of type float, but are cast into an integer per the requests
+        of the documentation. METS are calculated using  calories = minutes / 60 * EXERSIZE_CONST * weight / 2.2. The calories are then quantified as an 
+        activity level using a decision tree.
+
+        There are constructs for choices 1-4. Choice 5 simply validates input, and then breaks the primary while loop by setting quitting = true. 
+        */
+
+
 
         //input validation for user input, if cin.fail did not fail (it succeeded) and it is in range 
         if(!cin.fail() && userChoice <= 5 && userChoice >= 1)
