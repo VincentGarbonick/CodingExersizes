@@ -9,6 +9,8 @@ using std::setw;
 using std::left;
 using std::endl;
 using std::right;
+using std::setprecision;
+using std::fixed; 
 
 const float RUNNING = 10.0, BIKING = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
 
@@ -21,7 +23,7 @@ int main(void)
 {
     bool quitting = false, validLoop = false, validMins = false, validWeight = false; //this is the variable for quitting. if this is set to true, the loop exits 
     int userChoice; //this stores the choice of the user 
-    float weight, minutes; //variables used in MET calculation 
+    float weight, minutes, calories; //variables used in MET calculation 
 
     //clears output buffer 
     cout << endl;
@@ -41,7 +43,7 @@ int main(void)
     cout << setw(68) << "|__________________________________________________________________|" << endl;
     cout << endl;
 
-    
+
     //clears output buffer
     //loops runs forever unless quitting is set to false
     while(quitting == false)
@@ -50,16 +52,31 @@ int main(void)
 
 
         //polls for user input 
+        cin.clear(); //clears error signal if cin failed before program looped again
         cout << setw(2) <<  "Enter the workout that you wish to track, or end to exit: " << endl;
         cin >> userChoice; 
-        //input validation for user input 
-        if(isdigit(userChoice) && userChoice <= 5 && userChoice >= 1)
-        {
+        cin.ignore();
 
+        //input validation for user input, if cin.fail did not fail (it succeeded) and it is in range 
+        if(!cin.fail() && userChoice <= 5 && userChoice >= 1)
+        {
+            
             //under all if statements, all input is validated and held within an infinite while loop. It will lock you into the process until you input valid variables
             if(userChoice == 1)
             { 
-                cout << "poopy";   
+                cout << setw(2) << "Enter your weight: ";
+                cin >> weight;
+                cout << endl;
+                cin.ignore(); 
+
+                cout << setw(2) << "Enter minutes worked: "; 
+                cin >> minutes;
+                cout <<endl;
+                cin.ignore();
+
+                calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt for biking was: " << calories << endl;
+
             };
 
         }
@@ -67,6 +84,7 @@ int main(void)
         else
         {
             cout << setw(2) << "That is not valid input, please follow the menu carefully." << "\n" << endl; 
+            cin.clear(); //clears error state of cin
         };
 
 
@@ -76,6 +94,7 @@ int main(void)
 
         validLoop = false; //resets valid 
         cin.ignore(); //flush output buffer one last time 
+        userChoice = 0; //resets userChoice 
     };
     return 0; 
 
