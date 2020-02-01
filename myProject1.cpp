@@ -1,3 +1,12 @@
+/*
+Vincent Garbonick 
+University of Akron
+
+The purpose of this program is to calculate caloric expendature using MET, weight, and other such things. This program utilizes a menu structure 
+to perform its operations. 
+*/
+
+
 #include <stdio.h>
 #include <iostream>
 #include <iostream>
@@ -55,9 +64,10 @@ int main(void)
 
         //polls for user input 
         //cin.clear(); //clears error signal if cin failed before program looped again
-        cout << setw(TEXTMARGIN) <<  "Enter the workout that you wish to track, or end to exit: " << endl;
+        cout << setw(TEXTMARGIN) <<  "Enter the workout that you wish to track, or end to exit: " ;
         cin >> userChoice; 
         cin.ignore();
+        cout << endl;
 
         //input validation for user input, if cin.fail did not fail (it succeeded) and it is in range 
         if(!cin.fail() && userChoice <= 5 && userChoice >= 1)
@@ -82,8 +92,8 @@ int main(void)
                         {
                             cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
                             cin >> minutes;
-                            cout <<endl;
-                            cin.ignore();
+                            //cout <<endl;
+                            //cin.ignore();
                             
                             if(!cin.fail() && minutes <= 60 && minutes >= 30)
                             {
@@ -94,8 +104,9 @@ int main(void)
                             else 
                             {
                                 //error handling for minute while loop
-                                cout << setw(2) << "The minutes must be between 30 and 60" << "\n" << endl; 
+                                cout << setw(2) << "The minutes must be between 30 and 60" << endl; 
                                 cin.clear(); //clears error state of cin
+                                cin.ignore();
 
                             }
                         }
@@ -154,8 +165,8 @@ int main(void)
                         {
                             cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
                             cin >> minutes;
-                            cout <<endl;
-                            cin.ignore();
+                            //cout <<endl;
+                            //cin.ignore();
                             
                             if(!cin.fail() && minutes <= 60 && minutes >= 30)
                             {
@@ -226,8 +237,8 @@ int main(void)
                         {
                             cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
                             cin >> minutes;
-                            cout <<endl;
-                            cin.ignore();
+                            //cout <<endl;
+                            //cin.ignore();
                             
                             if(!cin.fail() && minutes <= 30 && minutes >= 15)
                             {
@@ -298,8 +309,8 @@ int main(void)
                         {
                             cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
                             cin >> minutes;
-                            cout <<endl;
-                            cin.ignore();
+                            //cout <<endl;
+                            //cin.ignore();
                             
                             if(!cin.fail() && minutes <= 90 && minutes >= 60)
                             {
