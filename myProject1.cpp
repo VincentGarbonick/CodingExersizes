@@ -14,7 +14,7 @@ using std::right;
 using std::setprecision;
 using std::fixed; 
 
-const float RUNNING = 10.0, BIKING = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
+const float BIKING = 10.0, TREADMILL = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
 
 
 
@@ -85,7 +85,7 @@ int main(void)
                             cout <<endl;
                             cin.ignore();
                             
-                            if(!cin.fail() && weight <= 999 && weight >= 1)
+                            if(!cin.fail() && minutes <= 60 && minutes >= 30)
                             {
                                 validMins = true; //breaks minute validation while loop
                                 minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
@@ -96,8 +96,7 @@ int main(void)
                                 //error handling for minute while loop
                                 cout << setw(2) << "The minutes must be between 30 and 60" << "\n" << endl; 
                                 cin.clear(); //clears error state of cin
-                                cin.ignore(); //flushes input buffer
-                                cout << endl; //flushes output buffer
+
                             }
                         }
 
@@ -118,7 +117,7 @@ int main(void)
                 
 
 
-                calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
+                calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt 
                 cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt for biking was: " << calories << endl;
 
                 if(calories >= 0 && calories <= 200)
@@ -136,9 +135,172 @@ int main(void)
 
                 cout << "\n" << endl; //adds a nice little newline 
                 
-            };
+            }
+            else if(userChoice == 2)
+            { 
+                while(validWeight == false)
+                {
+                    cout << setw(TEXTMARGIN) << "Enter your weight: ";
+                    cin >> weight;
+                    cout << endl;
+                    cin.ignore(); 
+                    
+                    if(!cin.fail() && weight <= 999 && weight >= 1)
+                    {
+                        //secondary input validation block
+                        validWeight = true; //breaks weight validation while loop
+                        
+                        while(validMins == false)
+                        {
+                            cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
+                            cin >> minutes;
+                            cout <<endl;
+                            cin.ignore();
+                            
+                            if(!cin.fail() && minutes <= 60 && minutes >= 30)
+                            {
+                                validMins = true; //breaks minute validation while loop
+                                minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
 
-        }
+                            }
+                            else 
+                            {
+                                //error handling for minute while loop
+                                cout << setw(2) << "The minutes must be between 30 and 60" << "\n" << endl; 
+                                cin.clear(); //clears error state of cin
+                                cin.ignore();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        //error handling for weight while loop
+                        cout << setw(2) << "That is not valid input, pick weight between 1 and 999" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore(); //flushes input buffer
+                        cout << endl; //flushes output buffer
+                    }
+                };
+
+
+
+
+                
+
+
+                calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt 
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt for biking was: " << calories << endl;
+
+                if(calories >= 0 && calories <= 200)
+                {
+                    cout << "light-intensity aerobic activity" << endl;
+                }
+                else if(calories >= 201 && calories <= 500)
+                {
+                    cout << "moderate-intensity activity" << endl;
+                }
+                else 
+                {
+                    cout << "vigerous-intesnity aerobic activity" << endl;
+                };
+
+                cout << "\n" << endl; //adds a nice little newline 
+                
+            }
+            else if(userChoice == 3)
+            { 
+                while(validWeight == false)
+                {
+                    cout << setw(TEXTMARGIN) << "Enter your weight: ";
+                    cin >> weight;
+                    cout << endl;
+                    cin.ignore(); 
+                    
+                    if(!cin.fail() && weight <= 999 && weight >= 1)
+                    {
+                        //secondary input validation block
+                        validWeight = true; //breaks weight validation while loop
+                        
+                        while(validMins == false)
+                        {
+                            cout << setw(TEXTMARGIN) << "Enter minutes worked: "; 
+                            cin >> minutes;
+                            cout <<endl;
+                            cin.ignore();
+                            
+                            if(!cin.fail() && minutes <= 30 && minutes >= 15)
+                            {
+                                validMins = true; //breaks minute validation while loop
+                                minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+
+                            }
+                            else 
+                            {
+                                //error handling for minute while loop
+                                cout << setw(2) << "The minutes must be between 15 and 30" << "\n" << endl; 
+                                cin.clear(); //clears error state of cin
+                                cin.ignore();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        //error handling for weight while loop
+                        cout << setw(2) << "That is not valid input, pick weight between 1 and 999" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore(); //flushes input buffer
+                        cout << endl; //flushes output buffer
+                    }
+                };
+
+
+
+
+                
+
+
+                calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt 
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt for lifting was: " << calories << endl;
+
+                if(calories >= 0 && calories <= 200)
+                {
+                    cout << "light-intensity aerobic activity" << endl;
+                }
+                else if(calories >= 201 && calories <= 500)
+                {
+                    cout << "moderate-intensity activity" << endl;
+                }
+                else 
+                {
+                    cout << "vigerous-intesnity aerobic activity" << endl;
+                };
+
+                cout << "\n" << endl; //adds a nice little newline 
+                
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        } // ending bracket for original user input if statement
         
         else
         {
