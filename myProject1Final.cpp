@@ -67,7 +67,7 @@ int main()
             }
             else
             {
-                cout << setw(TEXTMARGIN) << "Please use the menu and select valid options." << endl;
+                cout << setw(TEXTMARGIN) << "Please use the menu and select valid options." << "\n" << endl;
                 cin.clear(); //clears cin error state 
                 cin.ignore(); //ignores newline 
             }
@@ -89,7 +89,7 @@ int main()
             }
             else
             {
-                cout << setw(TEXTMARGIN) << "Please select a valid weight." << endl;
+                cout << setw(TEXTMARGIN) << "Please select a valid weight." << "\n" << endl;
                 cin.clear(); //clears cin error state 
                 cin.ignore(); //ignores newline 
             }
@@ -97,15 +97,151 @@ int main()
         }while(validWeight == false);
 
         //cases for user choices
+        switch(userChoice)
+        {
+            case 1: 
+                do
+
+                {
+                    cout << "Enter the number of minutes biking: ";
+                    cin >> minutes;
+
+
+                    if(!cin.fail() && minutes <= 60 && minutes >= 30)
+                    {
+                        validMins = true; //breaks minute validation while loop
+                        minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+                        cin.ignore();
+                        
+                        calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt for BIKE 
+
+                    }
+                    else 
+                    {
+                        //error handling for minute while loop
+                        cout << setw(2) << "The minutes must be between 30 and 60" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore();
+                    }
+
+                } while(validMins == false);
+                
+                break;
+
+
+            case 2: 
+                do
+
+                {
+                    cout << "Enter the number of minutes on treadmill: ";
+                    cin >> minutes;
+
+
+                    if(!cin.fail() && minutes <= 60 && minutes >= 30)
+                    {
+                        validMins = true; //breaks minute validation while loop
+                        minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+                        cin.ignore();
+                        
+                        calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt for BIKE 
+
+                    }
+                    else 
+                    {
+                        //error handling for minute while loop
+                        cout << setw(2) << "The minutes must be between 30 and 60" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore();
+                    }
+
+                } while(validMins == false);
+                
+                break;
+
+            case 3: 
+                do
+
+                {
+                    cout << "Enter the number of minutes lifting: ";
+                    cin >> minutes;
+
+
+                    if(!cin.fail() && minutes <= 30 && minutes >= 15)
+                    {
+                        validMins = true; //breaks minute validation while loop
+                        minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+                        cin.ignore();
+                        
+                        calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt for BIKE 
+
+                    }
+                    else 
+                    {
+                        //error handling for minute while loop
+                        cout << setw(2) << "The minutes must be between 15 and 30" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore();
+                    }
+
+                } while(validMins == false);
+                
+                break;
+
+            case 4: 
+                do
+
+                {
+                    cout << "Enter the number of minutes doing yoga: ";
+                    cin >> minutes;
+
+
+                    if(!cin.fail() && minutes <= 90 && minutes >= 60)
+                    {
+                        validMins = true; //breaks minute validation while loop
+                        minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
+                        cin.ignore();
+                        
+                        calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt for BIKE 
+
+                    }
+                    else 
+                    {
+                        //error handling for minute while loop
+                        cout << setw(2) << "The minutes must be between 60 and 90" << "\n" << endl; 
+                        cin.clear(); //clears error state of cin
+                        cin.ignore();
+                    }
+
+                } while(validMins == false);
+                
+                break;
+            
+            case 5:
+                
+                quitting = true; 
+                
+                break; 
+        } // end of switch/case statement
 
         //quantification for how many calories burnt 
         
 
-
-
+        cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt were: " << calories << endl;
+        if(calories >= 0 && calories <= 200)
+        {
+            cout << "light-intensity aerobic activity" << endl;
+        }
+        else if(calories >= 201 && calories <= 500)
+        {
+            cout << "moderate-intensity activity" << endl;
+        }
+        else 
+        {
+            cout << "vigerous-intesnity aerobic activity" << endl;
+        };
 
         validMins = false;
         validChoice = false; 
         validWeight = false; //resets all validation flags 
     } // closing bracket for primary while loop
-}
+} //closing bracket for main statement 
