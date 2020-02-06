@@ -207,27 +207,32 @@ consoleInput()
     int intVar1;
     float floatVar2;
     char charVar3;
+    //use cin.ignore to get rid of newline
     cout << "input int" << endl;
     cin >> intVar1;
+    cin.ignore();
+
     cout << "input float" << endl;
     cin >> floatVar2;
+    cin.ignore();
+
     cout << "input char" << endl;
     cin >> charVar3;
+    cin.ignore();
 
     //B
     char charVarB;
     std::string stringB;
     float floatVar2B;
 
-    //ignores newline so we can use cin.get
+    
     cout << "enter char" << endl;
-    cin.ignore();
     charVarB = cin.get();
-    cin.ignore();
+    cin.ignore(); //do we need cin.ignore() here?
+    
     cout << "enter string" << endl;
     getline(cin, stringB);
 
-    // I continually call cin.ignore() to be extra sure the buffer is cleared, because I am sick of getting errors. Sorry.
     cout << "enter a float" << endl;
     cin >> floatVar2B;
     cin.ignore();
@@ -235,9 +240,7 @@ consoleInput()
     //C
     std::string longString;
     cout << "enter a long string" << endl;
-    cin >> longString;
-    //longString.substring(0,10);
-    cin.ignore();
+    getline(cin, longString);
 
     //D
     int intB1, intB2;
