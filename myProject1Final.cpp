@@ -113,7 +113,7 @@ int main()
                         minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
                         cin.ignore();
                         
-                        calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt for BIKE 
+                        calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt for  
 
                     }
                     else 
@@ -143,7 +143,7 @@ int main()
                         minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
                         cin.ignore();
                         
-                        calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt for BIKE 
+                        calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt   
 
                     }
                     else 
@@ -172,7 +172,7 @@ int main()
                         minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
                         cin.ignore();
                         
-                        calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt for BIKE 
+                        calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt   
 
                     }
                     else 
@@ -201,7 +201,7 @@ int main()
                         minutes = (int)minutes; //casts our minutes to an integer instead of a float for efficiency
                         cin.ignore();
                         
-                        calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt for BIKE 
+                        calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt  
 
                     }
                     else 
