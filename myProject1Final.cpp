@@ -227,6 +227,39 @@ int main()
         
 
         cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt were: " << calories << endl;
+        
+        //outputs cout based on what exersize you did, per the instructions 
+        switch(userInput) 
+        {
+            case 1:
+                
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt on the biking were: " << calories << endl;
+                
+                break;
+                
+            case 2: 
+                
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt on the treadmill were: " << calories << endl;
+                
+                break;
+            
+            case 3: 
+                
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burt lifing were: " << calories << endl;
+                
+                break;
+                
+            case 4:
+                
+                cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt doing yoga were: " << calories << endl;
+                
+                break; 
+        
+        
+        }
+        
+        //tells how intense exersize was
+        
         if(calories >= 0 && calories <= 200)
         {
             cout << "light-intensity aerobic activity" << endl;
