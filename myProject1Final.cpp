@@ -58,19 +58,54 @@ int main()
 
             cout << setw(TEXTMARGIN) <<  "Enter the workout that you wish to track, or end to exit: " ;
             cin >> userChoice; 
-            cin.ignore(); //tosses out newline so we don't have to worry about it later 
 
             if(!cin.fail() && userChoice <= 5 && userChoice >= 1)
             {
-                cout << setw(TEXTMARGIN) << "Please use the menu and select valid options." << endl;
-                cin.clear(); //clears cin error state 
-                
+                validChoice = true; 
+                cin.ignore(); //tosses out newline so we don't have to worry about it later 
+
             }
             else
             {
-                validChoice = true; 
+                cout << setw(TEXTMARGIN) << "Please use the menu and select valid options." << endl;
+                cin.clear(); //clears cin error state 
+                cin.ignore(); //ignores newline 
             }
 
         }while(validChoice == false);
-    }
+
+
+        do
+        {           
+
+            cout << setw(TEXTMARGIN) <<  "Enter your weight: " ;
+            cin >> weight; 
+            
+
+            if(!cin.fail() && weight <= 999 && weight >= 1)
+            {
+                validWeight = true; 
+                cin.ignore(); //tosses out newline so we don't have to worry about it later 
+            }
+            else
+            {
+                cout << setw(TEXTMARGIN) << "Please select a valid weight." << endl;
+                cin.clear(); //clears cin error state 
+                cin.ignore(); //ignores newline 
+            }
+
+        }while(validWeight == false);
+
+        //cases for user choices
+
+        //quantification for how many calories burnt 
+        
+
+
+
+
+        validMins = false;
+        validChoice = false; 
+        validWeight = false; //resets all validation flags 
+    } // closing bracket for primary while loop
 }
