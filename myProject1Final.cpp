@@ -226,7 +226,7 @@ int main()
         //quantification for how many calories burnt 
                 
         //outputs cout based on what exersize you did, per the instructions 
-        switch(userInput) 
+        switch(userChoice) 
         {
             case 1:
                 
