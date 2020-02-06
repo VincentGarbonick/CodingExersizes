@@ -224,10 +224,7 @@ int main()
         } // end of switch/case statement
 
         //quantification for how many calories burnt 
-        
-
-        cout << setw(2) << setprecision(1) << fixed << "Your total calories burnt were: " << calories << endl;
-        
+                
         //outputs cout based on what exersize you did, per the instructions 
         switch(userInput) 
         {
