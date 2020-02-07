@@ -1,6 +1,6 @@
 //
-//   COPYRIGHT (C) Student@zips.uakron.edu>, 2020  All rights reserved.
-//   Student Name
+//   COPYRIGHT (C) vrg6@zips.uakron.edu>, 2020  All rights reserved.
+//   Vincent Garbonick
 //   Purpose: This is myCode and is based upon what we study for Comp Sci
 //
 #include <cassert>
@@ -320,7 +320,50 @@ operations()
   float revenues = 200000, computerExpenses = 10000, salaries = 50000, utilities = 5000, taxes = 2500; 
   float revenueEquationResult = revenues / (computerExpenses + salaries + utilities + taxes);
 
-  //D TODO: figure out what chrissy actually wants for this part 
+  int primeCheck; 
+  bool checkFlag; //flag for if entered number is prime or not 
+  int remainderCheck; //variable for storing remainder of modulus operators 
+  cout << "Enter a number to check if it's prime." << endl; 
+  cin >> primeCheck;
+
+  //divides all numbers from 2 to the number we are checking. if number % count returns zero for any incremented number, the number is not prime and the loop is exited 
+  for(int i = 2; i <= primeCheck; ++i)
+  {
+    remainderCheck = primeCheck % i; 
+
+    
+    if(remainderCheck == 0 && i == primeCheck)
+    {
+      checkFlag = true; 
+    }
+    /*
+    ends the for loop if remainderCheck is equal to 0 and i is not equal to prime check: meaning the checked number was perfectly divisible by something other 
+    than zero or 1 
+    */
+    else if(remainderCheck == 0 && i != primeCheck)
+    {
+      checkFlag = false; 
+      break; 
+      /*
+      Although break statements are generally bad practice, it makes sense here in this application since 
+      we need to break out of the loop if we find out the number is divisible by something other than the 
+      number we are testing 
+      */
+    }
+    else 
+    {
+      checkFlag = false; 
+    }
+  }
+
+  if(checkFlag == true)
+  {
+    cout << "Number is prime." << endl;
+  }
+  else 
+  {
+    cout << "Number is not prime." << endl; 
+  }
 
   cout << "end of operations" << endl;
   cin.get();
@@ -330,8 +373,8 @@ void
 decisions()
 {
   //A this tells us what grade we got
-  float totalPossible = 99.99, totalEarned = 80.32; 
-  float grade = totalEarned / totalPossible;
+  float totalPossible = 99.99, totalEarned = 70.99; 
+  float grade = totalEarned / totalPossible * 100;
 
   std::string letterGrade; 
   //formatted as >= lesser percentage, <= larger percentage
@@ -363,27 +406,102 @@ decisions()
   {
     letterGrade = "C";
   }
-  //else if(grade )
+  else if(grade >= 70 && grade <= 72.99)
+  {
+    letterGrade = "C-";
+  }
+  else if(grade >= 67 && grade <= 69.99)
+  {
+    letterGrade = "D+";
+  }
+  else if(grade >= 63 && grade <= 66.99)
+  {
+    letterGrade = "D";
+  }
+  else if(grade >= 60 && grade <= 62.99)
+  {
+    letterGrade = "D-";
+  }
+  else 
+  {
+    letterGrade = "F";
+  };
+  
   cout << "Letter grade is " << letterGrade << endl;
 
+//B 
+
+bool strategy = true;
+
+if(strategy == true)
+{
+  cout << "The strategy calls for the aquisition of 1000 beanbag chairs." << endl;
+}
+else
+{
+  cout << "The strategy saves expenditures for the aqusition of the 1000 bean bag charis." << endl;
+}
+
+//C
+
+int compareNumber = 10;
+int computationNumber = 20;
+
+computationNumber = computationNumber / 2 + 33; 
+
+if(compareNumber < computationNumber)
+{
+  cout << "Computed number is greater." << endl; 
+}
+else if(compareNumber == computationNumber)
+{
+  cout << "Numbers are equal" << endl;
+}
+else
+{
+  cout << "Initialized number is greater." << endl;
+}
 
 
+//D 
+int testVar = 10; //test variable 
+
+//we are checking to make sure the test
+
+/*
+Tests if a testvariable is a number 5-10 and less than 100. This series of checking statements uses short circuiting, because if the number 
+is not at least equal to an integer 5-10 which is one of the main condition, it doesn't bother checking if the number is also less than 100 
+*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if(testVar == 5 && testVar < 100)
+{
+  cout << "testvar is equal to 5 and less than 100" << endl;
+}
+else if(testVar == 6 && testVar < 100 )
+{
+  cout << "testvar is equal to 6 and less than 100" << endl;
+}
+else if(testVar == 7 && testVar < 100 )
+{
+  cout << "testvar is equal to 7 and less than 100" << endl;
+}
+else if(testVar == 8 && testVar < 100 )
+{
+  cout << "testvar is equal to 8 and less than 100" << endl;
+}
+else if(testVar == 9 && testVar < 100 )
+{
+  cout << "testvar is equal to 9 and less than 100" << endl;
+}
+else if(testVar == 10 && testVar < 100 )
+{
+  cout << "testvar is equal to 10 and less than 100" << endl;
+}
+else 
+{
+  cout << "testvar is not equal to a number 5-10 and less than 100." << endl;
+}
 
 
 
@@ -398,6 +516,136 @@ decisions()
 void
 iterations()
 {
+
+
+  float totalPossible, totalEarned; 
+  bool validEntries = false;
+  std::string letterGrade; 
+  //formatted as >= lesser percentage, <= larger percentage
+  
+  for(int i = 0; i < 11; i++)
+  {
+
+    do
+    {           
+      cout << "Enter total possible points." << endl;
+      cin >> totalPossible; 
+
+      if(!cin.fail() && totalPossible <= 100 && totalPossible >= 1)
+      {
+      
+      validEntries = true; 
+      cin.ignore(); //tosses out newline so we don't have to worry about it later 
+      
+      }
+
+      else
+      {
+      
+      cout << "Please select a number 0-100" << "\n" << endl;
+      cin.clear(); //clears cin error state 
+      cin.ignore(); //ignores newline 
+    
+      }
+
+    }while(validEntries == false);
+
+
+    validEntries = false; //resets validentries
+
+    do
+    {           
+      cout << "Enter total earned points." << endl;
+      cin >> totalEarned; 
+
+      if(!cin.fail() && totalEarned <= 100 && totalEarned >= 1)
+      {
+      
+      validEntries = true; 
+      cin.ignore(); //tosses out newline so we don't have to worry about it later 
+      
+      }
+
+      else
+      {
+      
+      cout << "Please select a number 0-100" << "\n" << endl;
+      cin.clear(); //clears cin error state 
+      cin.ignore(); //ignores newline
+      } 
+    
+    }while(validEntries == false);
+  
+    float grade = totalEarned / totalPossible * 100;
+    validEntries = false; //resets validentries
+
+    if(grade >= 93 && grade <= 100 )
+    {
+      letterGrade = "A";
+    }
+    else if(grade >= 90 && grade <= 92.99) 
+    {
+      letterGrade = "A-";
+    }
+    else if(grade >= 87 && grade <= 89.99)
+    {
+      letterGrade = "B+";
+    }
+    else if(grade >= 83 && grade <= 86.99)
+    {
+      letterGrade = "B";
+    }
+    else if(grade >= 80 && grade <= 82.99)
+    {
+      letterGrade = "B";
+    }
+    else if(grade >= 77 && grade <= 79.99)
+    {
+      letterGrade = "C+";
+    }
+    else if(grade >= 73 && grade <= 76.99)
+    {
+      letterGrade = "C";
+    }
+    else if(grade >= 70 && grade <= 72.99)
+    {
+      letterGrade = "C-";
+    }
+    else if(grade >= 67 && grade <= 69.99)
+    {
+      letterGrade = "D+";
+    }
+    else if(grade >= 63 && grade <= 66.99)
+    {
+      letterGrade = "D";
+    }
+    else if(grade >= 60 && grade <= 62.99)
+    {
+      letterGrade = "D-";
+    }
+    else 
+    {
+      letterGrade = "F";
+    };
+
+    cout << "Letter grade is " << letterGrade << endl;
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   cout << "end of iterations" << endl;
   cin.get();
 }
