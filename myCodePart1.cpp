@@ -191,9 +191,9 @@ variables()
   //defines a macro called letter as a
   #define LETTER a
   // E
-  using std::cout;
-  using std::cin;
-  using std::endl;
+  using std::cout; //name for cout which lets us output things 
+  using std::cin; //name for cin which lets us use input stream
+  using std::endl; //name for endl which lets us end cout statements 
 
     cout << "end of console input" << endl;
     cin.get();
@@ -522,10 +522,10 @@ iterations()
   bool validEntries = false;
   std::string letterGrade; 
   //formatted as >= lesser percentage, <= larger percentage
-  
+  /*
   for(int i = 0; i < 11; i++)
   {
-
+    
     do
     {           
       cout << "Enter total possible points." << endl;
@@ -631,12 +631,56 @@ iterations()
     cout << "Letter grade is " << letterGrade << endl;
   
   }
+  */
+  //B 
 
+  bool quitting = false; //quitting variable 
+  int userChoice;
+  do
+  {
+    cout << "======================" << endl;
+    cout << "1) Dogs" << endl;
+    cout << "2) Cats" << endl;
+    cout << "3) Frogs" << endl;
+    cout << "4) Quit" << endl;
+    cout << "======================" << endl;
 
+    cin >> userChoice;
+    
+    if(userChoice == 4)
+    {
+      quitting = true; 
 
+    }
+    else
+    {
+      cout << "good choice!" << endl;
 
+    }
+  } while (quitting == false);
+  
+  //C
+  for(int loopy; loopy < 100; loopy++)
+  {
+    cout << loopy << " " << endl;
+    
+  }
 
-
+  //D
+  
+  
+  int i; // counting variable  
+  for(i = 0; i <= 127; i++)
+  {
+    
+    cout << char(i) << "";  // casts our counting variable as a char to avoid strange loop behavior 
+  
+    if(i % 16 == 0)
+    {
+      cout << "\n" << endl; //adds a newline if we have printed out a multiple of 16 characters 
+    }
+    
+  }
 
 
 
@@ -653,6 +697,41 @@ iterations()
 void
 validations()
 {
+
+  /*
+  ascii characters correspond from 97-122 for uppercase 
+  and 65 - 90 for lowercase.
+
+  this loop checks to make sure that the user inputted a char, and then furthermore 
+  verifies that it is within range
+  */
+  bool validEntries = false;
+  char a; 
+
+  do
+      {           
+        cout << "Enter an upper or lowercase letter." << endl;
+        cin >> a; 
+        cout << (int)a << endl;
+        if(!cin.fail() && (  ((int)a >= 65 && (int)a <= 90) ||    ((int)a >= 97 && (int)a <= 122)  )) //makes sure that cin succeeds and cin either falls into uppercase or lowercase range
+        {
+        
+        validEntries = true; 
+        cout << "Valid input." << endl;
+        }
+
+        else
+        {
+        
+        cout << "Input a valid character per the requests." << "\n" << endl;
+        cin.clear(); //clears cin error state 
+        cin.ignore(); //ignores newline 
+
+        }
+
+      }while(validEntries == false);
+
+
   cout << "end of validations" << endl;
   cin.get();
 }
@@ -660,6 +739,35 @@ validations()
 void
 misc()
 {
+  //A 
+  int myVar = 0;
+  if (myVar = 0)
+
+  {
+
+  std::cout << "My var is zero everyone!";
+
+  }
+  //nothing prints out because the if statement would only work if it was (myVar == 0), because the == operator means "is equivalent to", but the = sign is for assingment
+  
+  //B 
+  if(myVar < 0)
+  {
+    cout << "lesser" << endl;
+  }
+  else if(myVar > 0)
+  {
+    cout << "greater" << endl;
+  }
+  else
+  {
+    cout << "equal" << endl;
+  }
+
+  int favNum = 4;
+  cout << ++favNum << " " << favNum++ << endl;
+  
+
   cout << "end of miscellaneous" << endl;
   cin.get();
 }
