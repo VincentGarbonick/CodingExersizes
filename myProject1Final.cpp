@@ -74,7 +74,12 @@ int main()
 
         }while(validChoice == false);
 
-
+        cout << endl; //adds a newline to separate input cases
+        
+        //deals with input case of 5, so program doesnt as for weight when you pick 5
+        if(userChoice != 5)
+        {
+        
         do
         {           
 
@@ -95,6 +100,10 @@ int main()
             }
 
         }while(validWeight == false);
+        
+        }
+                
+        cout << endl; //adds a newline to separate input cases
 
         //cases for user choices
         switch(userChoice)
@@ -222,9 +231,11 @@ int main()
                 
                 break; 
         } // end of switch/case statement
-
+        
         //quantification for how many calories burnt 
-                
+        
+        cout << endl; //adds a newline
+
         //outputs cout based on what exersize you did, per the instructions 
         switch(userChoice) 
         {
@@ -255,6 +266,10 @@ int main()
         
         }
         
+        
+        cout << endl; //adds a newline 
+
+        
         //tells how intense exersize was
         
         if(calories >= 0 && calories <= 200)
@@ -264,6 +279,11 @@ int main()
         else if(calories >= 201 && calories <= 500)
         {
             cout << "moderate-intensity activity" << endl;
+        }
+        //deals with the case where the user chooses 5
+        else if(userChoice == 5)
+        {
+            //does nothing
         }
         else 
         {
