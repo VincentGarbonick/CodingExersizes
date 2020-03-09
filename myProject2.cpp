@@ -26,15 +26,19 @@ using std::setw;
 using std::endl;
 using std::string;
 
+const float BIKING = 10.0, TREADMILL = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
 
 void printMenu(void); 
 int validateRange(int, int, string, string, char);
 float calorieCalculate(int, float);
+string getIntensity(float);
 
 int main()
 {
+
 int userChoice; 
 float weight, minutes, calories; 
+string intensity;  //how intesnse our exersize was 
 
 while(userChoice != 6)
 {
@@ -42,13 +46,17 @@ while(userChoice != 6)
 
 
     printMenu();
+
     userChoice = validateRange(1, 6, "Please enter an option on the menu!", "Enter your menu choice: ", 'i');
     
     if(userChoice != 5 && userChoice != 6)
     {
         weight = validateRange(1, 999, "Enter a weight from 0 - 999", "Enter your weight: ", 'f');
-        //calories = calorieCalculate(userChoice, weight);
+        calories = calorieCalculate(userChoice, weight);
+        intensity = getIntensity(calories);
 
+        cout << calories; 
+        cout << intensity;
     }
 
 
@@ -114,7 +122,7 @@ int validateRange(int lower, int upper, string failMessage, string coutMessage, 
     bool loopFlag = false; 
     do
     {    
-        cout << coutMessage << endl; 
+        cout << coutMessage; 
         cin >> userInput; 
 
         if(!cin.fail() && userInput <= upper && userInput >= lower)
@@ -147,3 +155,72 @@ Precondition:
 Postcondition: 
                 - calories expended  
 */
+float calorieCalculate(int userChoice, float weight)
+{
+
+    float calories, minutes;
+    
+    switch(userChoice)
+    {
+        case 1: 
+
+            minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked while biking: ", 'i'); //gets our minutes, casts our float minutes to int in function
+            calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
+            break;
+
+        case 2:
+            
+            minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked on treadmill: ", 'i'); //gets our minutes, casts our float minutes to int in function
+            calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt 
+            break;
+
+        case 3:
+            
+            minutes = validateRange(15, 30, "Enter minutes between 15 and 30. \n", "Enter minutes worked lifting: ", 'i'); //gets our minutes, casts our float minutes to int in function
+            calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt 
+            break;
+
+        case 4: 
+
+            minutes = validateRange(60, 90, "Enter minutes between 60 and 90. \n", "Enter minutes worked doing yoga: ", 'i'); //gets our minutes, casts our float minutes to int in function
+            calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt 
+            break;
+
+    }
+
+    return calories;
+
+}
+
+/*
+getIntensity
+
+Use: gets the intensity of exersize and returns a string 
+
+Precondition: 
+                - pass calories expended
+
+
+Postcondition: 
+                - intensity of exersize as a string   
+*/
+string getIntensity(float calories)
+{
+    string intensity; 
+
+    if(calories >= 0 && calories <= 200)
+    {
+        intensity = "light";
+    }
+    else if(calories >= 201 && calories <= 500)
+    {
+        intensity = "moderate";
+    }
+    else 
+    {
+        intensity = "heavy";
+    };
+
+    return intensity; 
+
+}
