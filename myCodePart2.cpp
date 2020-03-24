@@ -384,13 +384,53 @@ void menuSubject()
 //*******************************************
 // TASK 2 CODE
 //*******************************************
-void
-scopeType()
+void functionScope(void);
+int increment(int); 
+
+void scopeType()
 {
+  // Task A- there is a function variable named "cats" and a local variable named "cats". We will call the variable out and 
+  functionScope();
+  int cats = 100;
+  cout << "Cats is equl to: " << cats << " in local scope" << endl;
+
+
+  // Task B- use addTo to add 1 to each delcared variable- type conversion will occour- explain it!
+  int myInt = 1; 
+  cout << increment(myInt) << endl;
+  // outputs 2 because we are adding 1 to an integer 
+
+  char myChar = 'c';
+  cout << increment(myChar) << endl;
+  // prints out 100 because 'c' is 99 in the ascii charset, so casting 'c' as an int and adding 1 produces 100 as a result
+
+  float myFloat = 3.14159;
+  cout << increment(myFloat) << endl;
+  // prints out 4 because myFloat is rounded off to 3 and then when we add 1, the result is 4 
+  
   cout << "end of Scope and Type Conversion" << endl;
   cin.get();
 }
 
+//Demonstrates function scope of variable 
+// precondition: none 
+// postcondition: none 
+
+void functionScope()
+{
+  int cats = 6; 
+  cout << "Cats is equal to: " << cats << " in function scope" << endl;
+
+  return; 
+}
+// increment: takes an int input and adds 1 
+// precondition: int input 
+// postcondition: int output + 1
+int increment(int addTo)
+{
+  addTo = addTo + 1;
+  return addTo;
+} 
 
 //*******************************************
 // TASK 3 CODE
