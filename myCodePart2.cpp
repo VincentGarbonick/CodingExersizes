@@ -543,15 +543,28 @@ float divide400()
 }
 
 
-
+char charIncrementValue(char);
 //*******************************************
 // TASK 4 CODE
 //*******************************************
 void
 passBy()
 {
+  char pass = 'a';
+  cout << pass;
+  
+  pass = charIncrementValue(pass);
+  cout << "After pass by value: " << pass << endl;
+
+  
+
   cout << "end of pass bys" << endl;
   cin.get();
+}
+// charIncrementValue increments a char by one. Precondition: char value Postcondition. Postcondition: char value incremented.
+char charIncrementValue(char increment)
+{
+  return increment++;
 }
 
 //*******************************************
