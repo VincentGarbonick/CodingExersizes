@@ -432,15 +432,116 @@ int increment(int addTo)
   return addTo;
 } 
 
+//fucntion prototype
+char convertInt(int); 
+float divide400(void);
 //*******************************************
 // TASK 3 CODE
 //*******************************************
 void
 returns()
 {
+
+  //A 
+ 
+  /*
+  1. Call a function that accepts an int and returns a char 
+  2. Place this function in a loop and return across screen.
+  3. Allow the user to repeat this from 1 to 79 times 
+  4. Figure out how the user can stop the loop if they do not want to go 79 times 
+  
+  1. Call from inside main task 
+  2. Built in a loop with upper bound 79
+  3. each time we run the new function, it returns result and prints them across the screen 
+  4. You can limit the user to puttin in chars, or use the entire ascii range of 1-127. HOw to let them stop before hitting 79? 
+  */
+  
+  bool quitting = 0;
+  char userChoice; 
+  int passes = 48; //number of times we have gone through the loop
+
+  cout << "Welcome to the 79 times character converter!" << endl;
+  cout << "Press [ENTER] to print a character!" << endl;
+  cout << "Enter \"q\" to quit!" << endl;
+  
+  while(quitting == 0 && passes < 128)
+  {
+
+
+
+    cin.get(userChoice);
+    
+    if(userChoice == 'q')
+    {
+      quitting = 1;
+    }
+
+    else
+    {
+      cout << convertInt(passes);
+    }
+
+    passes++;
+
+  }
+
+  //B 
+  /*
+  Write a function and call it from your driver that quits early when it encounters an issue or unacceptable value 
+
+
+  1. This program will divide 400 by any number and return a float value 
+  2. If you try to divide by 0 or a non numeric, the function will exit
+  */
+
+  divide400();
+
+
   cout << "end of returns" << endl;
   cin.get();
 }
+
+// convert int takes an int input and returns a char based on that input 
+// precondition: pass it an int number 
+// postcondition: a character 
+char convertInt(int number)
+{
+  return char(number);
+}
+
+// divide400
+// this function will divide 400 by any numeric value and show the results. it will exit early if you enter something that is 0 or non numeric
+float divide400()
+{
+  float divideBy;
+  cout << "Enter a value to divide 400 by. If it is 0 or non numeric, the function will end early and return 1.1." << endl;
+  cin >> divideBy; 
+
+  if(divideBy == 0 || cin.fail())
+  {
+
+    cout << "Invalid input." << endl;
+
+    if(cin.fail())
+    {
+
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    return 1.1;
+  }
+
+  else
+  {
+    float result = 400 / divideBy;
+    cout << "400 divided by " << divideBy << " is " << result << endl;
+
+    return result;
+  }
+
+}
+
 
 
 //*******************************************
