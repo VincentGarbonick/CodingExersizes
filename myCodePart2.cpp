@@ -432,9 +432,10 @@ int increment(int addTo)
   return addTo;
 } 
 
-//fucntion prototype
+//fucntion prototypes 
 char convertInt(int); 
 float divide400(void);
+
 //*******************************************
 // TASK 3 CODE
 //*******************************************
@@ -595,16 +596,251 @@ char charIncrementValueShow(char increment)
   
   return increment;
 }
+
+// function prototypes for part 5 
+void menuSubjectCalc(void);
+float exersizeLoop(int); 
+void gradeShow(float);
+void isPrime(int);
+
 //*******************************************
 // TASK 5 CODE
 //*******************************************
 void
 moreFunk()
 {
+  // A 
+  /*
+  1. You created a menu function in a prior task 
+  2. Copy the prior work and add a function that gets called with each a choice 
+  3. use prior logic that akss for each exersize score and possible points (done in assignment 1) :/ make a function out of it and have the user set an upper bound
+  4. reuse the letter grade logic too ://
+  */
+  menuSubjectCalc();
+
+  // B 
+  /*
+  1. Make a function that figures out if a number is prime or not 
+  2. Have your program generate a random integer and pass it to the function 
+  3. Do this 10 times and display the results 
+  */
+  int i = 0;
+  while(i < 10)
+  {
+    isPrime( (rand() % 100 + 1) );
+    i++;
+  }
+
+
   cout << "end of more functions" << endl;
   cin.get();
 }
 
+// menuSubject makes a repeating menu structure that validates inputs and can be called from anywhere. Also can calculate the number of exersizes and score
+// precondition: nothing 
+// postcondition: nothing 
+
+void menuSubjectCalc()
+{
+  bool quitting = 0;
+  int userChoice;
+  do 
+  {
+    cout << "Please choose a subject from the menu" << endl;
+    cout << "1. Biology" << endl;
+    cout << "2. Sociology" << endl;
+    cout << "3. Geography" << endl;
+    cout << "4. Calculus" << endl;
+    cout << "5. Physics" << endl;
+    cout << "6. Calculate scores" << endl;   
+    cout << "7. Quit" << endl;
+
+    userChoice = validateRange(1, 7, "Please enter an option on the menu!", "Enter your menu choice: ", 'i');
+
+    switch(userChoice)
+    {
+      case 1: 
+        cout << "Biology was the choice" << endl;
+        break; 
+      
+      case 2: 
+        cout << "Sociology was the choice" << endl;
+        break;
+
+      case 3: 
+        cout << "Geography was the choice" << endl;
+        break;
+      
+      case 4: 
+        cout << "Calculus was the choice" << endl;
+        break;
+      
+      case 5: 
+        cout << "Physics was the choice" << endl;
+        break;
+      
+      case 6: 
+        // functions for number of exersizes and scoring 
+        int exersizeNum;
+        
+        exersizeNum = validateRange(0, 9999999, "Please enter something valid!", "Enter number of exersizes: ", 'i');
+
+        float percentScore; 
+
+        // calculates the total percent based on all assignement scores 
+        percentScore = exersizeLoop(exersizeNum);
+
+        // shows letter grade 
+        gradeShow(percentScore);
+
+        break;
+
+      case 7: 
+        quitting = 1;
+        break;
+    }
+
+  }while(quitting == 0);
+
+  cout << "\n";
+
+  return;
+
+}
+
+// Exersize loop. Loops over a total numver of exersizes and then returns your total "score"
+// precondition: number of exersizes 
+// postcondition: a total percent 
+
+float exersizeLoop(int passes)
+{
+  
+  float totalPossible = 0, totalEarned = 0;
+
+  for(int i = 1; i <= passes; i++)
+  {
+    cout << "For exersize " << i << " enter the total possible points \n" << endl;
+    totalPossible = totalPossible + validateRange(0, 9999999, "Please enter something valid!", "Enter possible points: ", 'f');
+
+    cout << "For exersize " << i << " enter the earned points \n" << endl;
+    totalEarned = totalEarned + validateRange(0, 9999999, "Please enter something valid!", "Enter earned points: ", 'f');
+
+  }
+
+  float percent = totalEarned / totalPossible * 100;
+  cout << "You got: " << percent << "%" <<  endl;
+
+  return percent;
+
+}
+// gradeShow- shows the letter grade obtained 
+// precon: float representing percent of grade 
+// postcon: cout letter grade 
+void gradeShow(float grade)
+{
+
+  string letterGrade;
+
+  if(grade >= 93 && grade <= 100 )
+    {
+      letterGrade = "A";
+    }
+    else if(grade >= 90 && grade <= 92.99) 
+    {
+      letterGrade = "A-";
+    }
+    else if(grade >= 87 && grade <= 89.99)
+    {
+      letterGrade = "B+";
+    }
+    else if(grade >= 83 && grade <= 86.99)
+    {
+      letterGrade = "B";
+    }
+    else if(grade >= 80 && grade <= 82.99)
+    {
+      letterGrade = "B";
+    }
+    else if(grade >= 77 && grade <= 79.99)
+    {
+      letterGrade = "C+";
+    }
+    else if(grade >= 73 && grade <= 76.99)
+    {
+      letterGrade = "C";
+    }
+    else if(grade >= 70 && grade <= 72.99)
+    {
+      letterGrade = "C-";
+    }
+    else if(grade >= 67 && grade <= 69.99)
+    {
+      letterGrade = "D+";
+    }
+    else if(grade >= 63 && grade <= 66.99)
+    {
+      letterGrade = "D";
+    }
+    else if(grade >= 60 && grade <= 62.99)
+    {
+      letterGrade = "D-";
+    }
+    else 
+    {
+      letterGrade = "F";
+    };
+
+    cout << "Letter grade is " << letterGrade << "\n" << endl;
+}
+
+// primecheck- checks if a number is prime and outputs result
+// precon: integer to check 
+// postcon: nothing 
+
+void isPrime(int primeCheck)
+{
+  bool checkFlag; //flag for if entered number is prime or not 
+  int remainderCheck;
+
+   for(int i = 2; i <= primeCheck; ++i)
+  {
+    remainderCheck = primeCheck % i; 
+
+    
+    if(remainderCheck == 0 && i == primeCheck)
+    {
+      checkFlag = true; 
+    }
+    /*
+    ends the for loop if remainderCheck is equal to 0 and i is not equal to prime check: meaning the checked number was perfectly divisible by something other 
+    than zero or 1 
+    */
+    else if(remainderCheck == 0 && i != primeCheck)
+    {
+      checkFlag = false; 
+      break; 
+      /*
+      Although break statements are generally bad practice, it makes sense here in this application since 
+      we need to break out of the loop if we find out the number is divisible by something other than the 
+      number we are testing 
+      */
+    }
+    else 
+    {
+      checkFlag = false; 
+    }
+  }
+
+  if(checkFlag == true)
+  {
+    cout << primeCheck << " is prime." << endl;
+  }
+  else 
+  {
+    cout << primeCheck << " is not prime." << endl; 
+  }
+
+}
 //*******************************************
 // TASK 6 CODE
 //*******************************************
