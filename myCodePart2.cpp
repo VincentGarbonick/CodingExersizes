@@ -544,6 +544,9 @@ float divide400()
 
 
 char charIncrementValue(char);
+void charIncrementReference(char &);
+char charIncrementValueShow(char);
+
 //*******************************************
 // TASK 4 CODE
 //*******************************************
@@ -551,12 +554,18 @@ void
 passBy()
 {
   char pass = 'a';
-  cout << pass;
-  
+  cout << pass << endl;
+  // A 
   pass = charIncrementValue(pass);
   cout << "After pass by value: " << pass << endl;
 
-  
+  // B
+  charIncrementReference(pass);
+  cout << "After pass by reference: " << pass << endl;
+
+  // C 
+  pass = charIncrementValueShow(pass);
+  cout << "Address of value at driver level: " << &pass << endl;
 
   cout << "end of pass bys" << endl;
   cin.get();
@@ -564,9 +573,28 @@ passBy()
 // charIncrementValue increments a char by one. Precondition: char value Postcondition. Postcondition: char value incremented.
 char charIncrementValue(char increment)
 {
-  return increment++;
+  increment++;
+  return increment;
 }
 
+// charIncrementValue increments a char by one. Precondition: char value Postcondition. Postcondition: char value incremented. It does this by passing address
+
+void charIncrementReference(char & pass)
+{
+  pass++;
+  return;
+}
+
+// charIncrementValue increments a char by one. Precondition: char value Postcondition. Postcondition: char value incremented. It shows the address of hte function level value
+
+char charIncrementValueShow(char increment)
+{
+
+  increment++;
+  cout << "address of value at function level is: " << &increment << endl;
+  
+  return increment;
+}
 //*******************************************
 // TASK 5 CODE
 //*******************************************
