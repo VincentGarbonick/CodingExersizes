@@ -741,6 +741,7 @@ float exersizeLoop(int passes)
 
   }
 
+  writeToFileScore(totalEarned, totalPossible);
   float percent = totalEarned / totalPossible * 100;
   cout << "You got: " << percent << "%" <<  endl;
 
@@ -986,7 +987,8 @@ void readFileAdd(string name)
 
 
 
-void charToASCII(char);
+int charToASCII(char);
+void punctuationCheck(char);
 //*******************************************
 // TASK 7 CODE
 //*******************************************
@@ -1001,31 +1003,71 @@ charIO()
   4. display the ascii value  
   */
   char c;
+  
+
 
   cout << "Enter a char value: ";
   cin >> c; 
 
-  charToASCII(c);
+  cout << charToASCII(c) << endl; 
 
-  // B 
+  // B
 
+  int conversionResult; // where the converted 
 
+  cout << "For this next exersize, try to get the char values to have ascii values between 97 to 122." << endl;
 
+  for(int i = 0; i < 10; i++)
+  {
+    cout << "Enter a char value: ";
+    cin >> c; 
+    
+    conversionResult = charToASCII(c);
+
+    if( !(conversionResult <= 122 && conversionResult >= 97) )
+    {
+      cout << c << " has an ASCII code of " << conversionResult << " which is out of range!" << endl;
+    }
+
+  }
+
+  // C check to see if inputted is a punctuation mark 
+  cout << "Enter a char and program will check if it is a punctuation mark: "; 
+  cin >> c;
+
+  punctuationCheck(c);
 
   cout << "end of char I/O" << endl;
   cin.get();
 }
 
 
-// charToASCII takes a char value and converts it to ascii and couts the result 
+// charToASCII takes a char value and converts it to ascii 
 // precon: char value passed 
-// postcon: cout ascii of char value   
-void charToASCII(char input);
+// postcon: cout ascii of char value return ascii value 
+int charToASCII(char input)
 {
-  cout << (int)char; 
-  return; 
+  
+  return (int)input; 
 }
 
+// punctuationCheck checks if character input is a punctuation 
+// precon: character input 
+// postcon: none 
+void punctuationCheck(char check)
+{
+  if((check == '!' || check == '.' || check == '?'))
+  {
+    cout << "Character was a punctuation mark." << endl;
+  }
+  else
+  {
+    {
+      cout << "Character was not a punctuation mark." << endl;
+    }
+  }
+  return;
+}
 
 
 
