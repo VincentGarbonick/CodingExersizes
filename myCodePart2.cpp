@@ -466,7 +466,7 @@ returns()
   cout << "Welcome to the 79 times character converter!" << endl;
   cout << "Press [ENTER] to print a character!" << endl;
   cout << "Enter \"q\" to quit!" << endl;
-  
+  cin.ignore(); // prevents program from automaticall pressing enter for some reason
   while(quitting == 0 && passes < 128)
   {
 
