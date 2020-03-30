@@ -1088,6 +1088,105 @@ void punctuationCheck(char check)
 void
 misc()
 {
+// cycle improvement
+/*
+1- remove first if statement since we are already checking for specific cases 
+2- remove if selection == 1 since we already know it is == 1 
+3- remove areacircle since we can just cout the calculation directly 
+4- remove if sleection ==2 since we already know that 
+5- calculate arearectangle and output in one step
+6- remove if selection ==3 since we already know that 
+7- calculate areatriangle and output directly 
+
+saved 7 cycles!!
+*/
+
+/*
+
+
+
+ 
+
+  if (selection == 1)
+  {
+    cout << "Enter radius" << endl;
+    cin >> radius;
+
+    if (radius > 0)
+    {
+      cout << "The area of your circle is " << 3.14159 * pow(radius, 2.0) << endl;
+    }
+
+  }
+
+   else if (selection == 2)
+   {
+
+       cout << "Enter length and width of your rectangle seperated by a space" << endl;
+
+       cin >> length >> width;
+
+       if (length > 0 && width > 0)
+
+       {
+
+
+           cout << "The area of your rectangle is " <<  length * width << endl;
+
+        }
+
+   }
+
+   else if (selection == 3)
+   { 
+
+      cout << "Enter the base and height of your triangle separated by a space" << endl;
+
+      cin >> base >> height; 
+
+      if (base > 0 && height > 0 )
+
+      {
+
+       
+
+         cout << "The area of your triangle is " << base * height * .5 << endl;
+
+      }
+
+   }
+
+   else if (selection == 4)
+   {
+
+      cout << "Program ending" << endl
+
+   }
+
+  
+
+else
+  {
+   cout << "This was not a valid selection" << endl; (myVar > 0)
+  }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   cout << "end of miscellaneous" << endl;
   cin.get();
 }
