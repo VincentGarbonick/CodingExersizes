@@ -11,6 +11,7 @@ This code was made to demo certain things we are learning in CS1
 */
 #include <cassert>
 #include <iosfwd>
+#include <fstream>
 #include <iostream>
 #include <iomanip>
 #include <limits>  // numeric_limits<std::streamsize> for validations
@@ -24,6 +25,7 @@ using std::setw;
 using std::left;
 using std::right;
 using std::string;
+using std::ofstream;
 
 static int uChoose = 0;
 
@@ -603,6 +605,9 @@ float exersizeLoop(int);
 void gradeShow(float);
 void isPrime(int);
 
+void writeToFileName(void);
+void writeToFileScore(float, float);
+
 //*******************************************
 // TASK 5 CODE
 //*******************************************
@@ -688,6 +693,10 @@ void menuSubjectCalc()
         float percentScore; 
 
         // calculates the total percent based on all assignement scores 
+
+        // asks for student's name 
+        writeToFileName();
+
         percentScore = exersizeLoop(exersizeNum);
 
         // shows letter grade 
@@ -716,14 +725,19 @@ float exersizeLoop(int passes)
 {
   
   float totalPossible = 0, totalEarned = 0;
+  float totalPossibleTemp = 0, totalEarnedTemp = 0; // temp values so we can write stuff to our file 
 
   for(int i = 1; i <= passes; i++)
   {
     cout << "For exersize " << i << " enter the total possible points \n" << endl;
+    totalPossibleTemp = totalPossible;
     totalPossible = totalPossible + validateRange(0, 9999999, "Please enter something valid!", "Enter possible points: ", 'f');
 
     cout << "For exersize " << i << " enter the earned points \n" << endl;
+    totalEarnedTemp = totalEarned;
     totalEarned = totalEarned + validateRange(0, 9999999, "Please enter something valid!", "Enter earned points: ", 'f');
+
+    writeToFileScore(totalEarnedTemp, totalPossibleTemp);
 
   }
 
@@ -841,16 +855,134 @@ void isPrime(int primeCheck)
   }
 
 }
+
+//void writeToFileName(void);
+//void writeToFileScore(float, float); //THESE FUNCTION PROTOTYPES ARE WITH THE TASK 5 PROTOTYPES BECAUSE THE PROGRAM WAS THROWING ERRORS DUE TO FORWARD DECLARATIONS BEING BEFORE USE
+void printOffFile(string); 
+void readFileAdd(string);
 //*******************************************
 // TASK 6 CODE
 //*******************************************
 void
 files()
 {
+  // A 
+  cout << "When you call menu entry 6, the results should be recorded to a file. Remember this." << endl;
+  menuSubjectCalc();
+
+  // B 
+  printOffFile("writeTo.txt");
+
+  // C 
+  readFileAdd("testNumbers.txt");
+
   cout << "end of files" << endl;
   cin.get();
 }
 
+// write to file writes name information to a file, it is used in the menu we designed. also checks to make sure the file is there (possibly)
+// precon: have a file named "writeTo.txt"
+// postcon none 
+void writeToFileName()
+{
+  /*
+  std::ifstream myFile("writeTo.txt");
+  
+  if (myFile)
+  { 
+   myFile.close();
+   cout << "No need to create a new file..." << endl;
+  }
+  else 
+  {
+
+  }
+  */
+
+  std::ofstream writeFile; 
+  writeFile.open("writeTo.txt", std::ios::app);
+
+  string tempName; //for storing the student's name 
+  cout << "Enter student's name: ";
+  cin >> tempName;
+
+  writeFile << "\n";
+  writeFile << tempName;
+  writeFile << "\n";
+
+  writeFile.close();
+  return;
+}
+
+// write to file writes score information to a file, it is used in the menu we designed 
+// precon: have a file named "writeTo.txt"
+// postcon none 
+void writeToFileScore(float totalEarned, float totalPossible)
+{
+
+  std::ofstream writeFile; 
+  writeFile.open("writeTo.txt", std::ios::app);
+
+  writeFile << totalEarned << "/" << totalPossible << "\n";
+
+  writeFile.close();
+  return;
+}
+
+// printOffFile() prints off a file
+// precon: name of file 
+// postcon: printed off file 
+void printOffFile(string name)
+{
+  string line; 
+  std::ifstream print; 
+
+  print.open(name);
+
+  while(!print.eof())
+  {
+    getline(print, line);
+    cout << line << "\n";
+  }
+
+  return;
+}
+
+// readFileAdd- this reads each line of the given brightspace file and adds all the numbers together 
+// precon: name of file 
+// postcon: cout the sum total of all numbers in the file 
+void readFileAdd(string name)
+{
+  string line; 
+  std::ifstream read; 
+  int total = 0; 
+
+  read.open(name);
+  
+  // error handling if file does not exist
+  if(!read) 
+  {
+    cout << "Cannot open input file.\n";
+    return;
+  }
+
+  while(!read.eof()) 
+  {
+    getline(read, line);
+    
+    //if we are not looking at a newline, add the numbers
+    if(line != "")
+    {
+      //cout << std::stoi(line) << "\n";
+      //cout << line;
+      total = total + std::stoi(line); //converts line to a string 
+    }
+
+    
+  }
+  cout << "Your total is: " << total << endl;
+  return;
+}
 //*******************************************
 // TASK 7 CODE
 //*******************************************
