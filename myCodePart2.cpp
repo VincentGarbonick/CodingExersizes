@@ -983,15 +983,62 @@ void readFileAdd(string name)
   cout << "Your total is: " << total << endl;
   return;
 }
+
+
+
+void charToASCII(char);
 //*******************************************
 // TASK 7 CODE
 //*******************************************
 void
 charIO()
 {
+  // A 
+  /*
+  1. ask user for input of a hcar type 
+  2. write a function that taks a charas as the arguement and returns the asii value 
+  3. call the function using the char variable and taking the input from the user 
+  4. display the ascii value  
+  */
+  char c;
+
+  cout << "Enter a char value: ";
+  cin >> c; 
+
+  charToASCII(c);
+
+  // B 
+
+
+
+
   cout << "end of char I/O" << endl;
   cin.get();
 }
+
+
+// charToASCII takes a char value and converts it to ascii and couts the result 
+// precon: char value passed 
+// postcon: cout ascii of char value   
+void charToASCII(char input);
+{
+  cout << (int)char; 
+  return; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //*******************************************
 // TASK 8 CODE
