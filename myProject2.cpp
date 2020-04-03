@@ -17,6 +17,10 @@ This log will be accessible via a password protected system.
 #include <iomanip>
 #include <limits>
 #include <ctime>
+#include <fstream>
+
+#define FILENAME "writeLogVinnie.txt"
+#define SPACING "   "
 
 //our namespace includes
 using std::cout;
@@ -27,6 +31,7 @@ using std::setw;
 using std::endl;
 using std::string;
 using std::to_string;
+using std::ofstream;
 
 const float BIKING = 10.0, TREADMILL = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
 
@@ -36,6 +41,16 @@ float calorieCalculate(int, float);
 string getIntensity(float);
 string genID(void);
 char* grabTime(void);
+void fileInit(string);
+
+// writes ID, activity, and minutes to file
+// parameters (fileName, ID, Activity, Minutes)
+void fileWriteMinAct(string, string, string, float);
+
+// writes calories, intensity, and timestap to file and adds newline to end. grabTime() is called from inside function
+// parameters (filename, calories, intensity)
+void fileWriteIntStamp(string, float, string);
+
 
 int main()
 {
@@ -43,6 +58,9 @@ int main()
 int userChoice; 
 float weight, minutes, calories; 
 string intensity;  //how intesnse our exersize was 
+
+// initialize file
+fileInit(FILENAME);
 
 while(userChoice != 6)
 {
@@ -61,10 +79,8 @@ while(userChoice != 6)
 
         cout << calories << endl; 
         cout << intensity << endl;
-        cout << genID() << endl;
-        cout << genID() << endl;
-        cout << grabTime() << endl;
-        cout << grabTime() << endl;
+        
+        // write everything to file 
 
     }
 
@@ -168,31 +184,46 @@ float calorieCalculate(int userChoice, float weight)
 {
 
     float calories, minutes;
-    
+    string ID; 
+
+    ID = genID();
+
     switch(userChoice)
     {
         case 1: 
 
             minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked while biking: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
+            
+            fileWriteMinAct(FILENAME, ID, "Biking", minutes);
             break;
 
         case 2:
             
             minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked on treadmill: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt 
+
+            fileWriteMinAct(FILENAME, ID, "Treadmill", minutes);
             break;
 
         case 3:
             
             minutes = validateRange(15, 30, "Enter minutes between 15 and 30. \n", "Enter minutes worked lifting: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt 
+
+            fileWriteMinAct(FILENAME, ID, "Lifting", minutes);
             break;
 
         case 4: 
 
             minutes = validateRange(60, 90, "Enter minutes between 60 and 90. \n", "Enter minutes worked doing yoga: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt 
+
+            fileWriteMinAct(FILENAME, ID, "Yoga", minutes);
+            break;
+
+        case 5: 
+            // print log, exit everything if the user enters the wrong password, maybe use a quitting flag?
             break;
 
     }
@@ -291,4 +322,31 @@ char* grabTime(void)
 
     return timeOf;
 
+}
+
+// fileInit creates an empty file with a passed name if the file doesn't already exist
+// Precondition: name of file as string 
+// Postcondition: file 
+void fileInit(string name)
+{
+    ofstream file;
+    file.open(name, std::ios::app);
+    file.close();
+
+    return;
+}
+
+// fileWriteMinAct writes ID, activity, and minutes to file
+// Precondition: (fileName, ID, Activity, Minutes)
+// Postcondition: written file 
+void fileWriteMinAct(string name, string ID, string Activity, float minutes)
+{
+    ofstream writeFile;
+    writeFile.open(name, std::ios::app);
+
+    writeFile << ID << SPACING << Activity << SPACING << minutes << SPACING;
+
+    writeFile.close();
+
+    return;
 }
