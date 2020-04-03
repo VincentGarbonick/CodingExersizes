@@ -19,8 +19,11 @@ This log will be accessible via a password protected system.
 #include <ctime>
 #include <fstream>
 
+// macros for easy mass editing 
 #define FILENAME "writeLogVinnie.txt"
 #define SPACING "   "
+#define PASSWORD "Top-Secret"
+
 
 //our namespace includes
 using std::cout;
@@ -32,12 +35,13 @@ using std::endl;
 using std::string;
 using std::to_string;
 using std::ofstream;
+using std::ifstream;
 
 const float BIKING = 10.0, TREADMILL = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
 
 void printMenu(void); 
 int validateRange(int, int, string, string, char);
-float calorieCalculate(int, float);
+float calorieCalculate(int, float, string);
 string getIntensity(float);
 string genID(void);
 char* grabTime(void);
@@ -51,13 +55,15 @@ void fileWriteMinAct(string, string, string, float);
 // parameters (filename, calories, intensity)
 void fileWriteIntStamp(string, float, string);
 
+void printFile(string);
+
 
 int main()
 {
 
-int userChoice; 
+int userChoice, hitNum = 0; 
 float weight, minutes, calories; 
-string intensity;  //how intesnse our exersize was 
+string intensity, ID, enteredPassword;  //how intesnse our exersize was 
 
 // initialize file
 fileInit(FILENAME);
@@ -65,24 +71,49 @@ fileInit(FILENAME);
 while(userChoice != 6)
 {
 
-
+    ID = genID();
 
     printMenu();
+    cout << right << "Your user ID is: " << ID << endl; 
+    cout << right << "Number of hits today is: " << std::setfill('0') << std::setw(5) << hitNum << "\n" << endl; 
+    cout << std::setfill(' ');
 
     userChoice = validateRange(1, 6, "Please enter an option on the menu!", "Enter your menu choice: ", 'i');
     
     if(userChoice != 5 && userChoice != 6)
     {
         weight = validateRange(1, 999, "Enter a weight from 0 - 999", "Enter your weight: ", 'f');
-        calories = calorieCalculate(userChoice, weight);
+        calories = calorieCalculate(userChoice, weight, ID);
         intensity = getIntensity(calories);
+
+        fileWriteIntStamp(FILENAME, calories, intensity);
 
         cout << calories << endl; 
         cout << intensity << endl;
+
+    
+    }
+    else if(userChoice == 5)
+    {
+        cout << "Enter password: ";
+        cin >> enteredPassword;
         
-        // write everything to file 
+        if(enteredPassword == PASSWORD)
+        {
+            printFile(FILENAME);
+        }
+        else
+        {
+            cout << "SECURITY BREACH!" << endl;
+
+            // if the password is incorrect, the program forces userChoice to be 6, which is the quitting variable :)
+            userChoice = 6;
+        }
+        
 
     }
+    
+    hitNum++;
 
 
 }
@@ -170,7 +201,7 @@ int validateRange(int lower, int upper, string failMessage, string coutMessage, 
 /*
 calorieCalculate 
 
-Use: calculates caloric expendature based on passed parameters 
+Use: calculates caloric expendature based on passed parameters
 
 Precondition: 
                 - pass userInput 1-4
@@ -180,11 +211,10 @@ Precondition:
 Postcondition: 
                 - calories expended  
 */
-float calorieCalculate(int userChoice, float weight)
+float calorieCalculate(int userChoice, float weight, string ID)
 {
 
     float calories, minutes;
-    string ID; 
 
     ID = genID();
 
@@ -220,10 +250,6 @@ float calorieCalculate(int userChoice, float weight)
             calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt 
 
             fileWriteMinAct(FILENAME, ID, "Yoga", minutes);
-            break;
-
-        case 5: 
-            // print log, exit everything if the user enters the wrong password, maybe use a quitting flag?
             break;
 
     }
@@ -349,4 +375,42 @@ void fileWriteMinAct(string name, string ID, string Activity, float minutes)
     writeFile.close();
 
     return;
+}
+
+// writes calories, intensity, and timestap to file and adds newline to end. grabTime() is called from inside function
+// precon: (filename, calories, intensity)
+// postcon: written file 
+void fileWriteIntStamp(string name, float calories, string inten)
+{
+    ofstream writeFile;
+    writeFile.open(name, std::ios::app);
+
+    writeFile << calories << SPACING << inten << SPACING << grabTime() << "\n";
+    
+    writeFile.close();
+
+    return;
+}
+
+// printfile prints the file out 
+// precon: file name 
+// postcon: printed file 
+
+void printFile(string name)
+{
+    ifstream readFile;
+    string printString;
+
+    readFile.open(name);
+    
+    cout << "ID" << SPACING << "Minutes" << SPACING << "Weight" << SPACING << "Calories" << SPACING << "Intensity" << SPACING << "Time In" << endl;
+
+    while(!readFile.eof())
+    {
+        getline(readFile, printString);
+        //cout << right << setw(6) << std::setfill('0') << printString << endl;
+        cout << printString << endl;
+    }
+    
+    readFile.close();
 }

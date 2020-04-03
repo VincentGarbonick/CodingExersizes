@@ -1,1 +1,2 @@
-07427   Treadmill   31   07427   Lifting   16   
+39356   Treadmill   31   751.515   heavy   Fri Apr  3 17:39:54 
+54062   Biking   40   909.091   heavy   Fri Apr  3 17:40:02 
