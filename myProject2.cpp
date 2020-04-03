@@ -35,7 +35,7 @@ int validateRange(int, int, string, string, char);
 float calorieCalculate(int, float);
 string getIntensity(float);
 string genID(void);
-string grabTime(void);
+char* grabTime(void);
 
 int main()
 {
@@ -62,6 +62,10 @@ while(userChoice != 6)
         cout << calories << endl; 
         cout << intensity << endl;
         cout << genID() << endl;
+        cout << genID() << endl;
+        cout << grabTime() << endl;
+        cout << grabTime() << endl;
+
     }
 
 
@@ -270,11 +274,11 @@ string genID()
     return ID;
 }
 
-// grabTime takes the system time and turns it into a string 
+// grabTime takes the system time and returns it 
 // Precondition: None 
 // Postcondition: system time as a string 
 
-string grabTime(void)
+char* grabTime(void)
 {
     // current date/time based on current system  
     time_t now = time(0);
@@ -285,8 +289,6 @@ string grabTime(void)
     // we want a way to limit the size to be just 20 in length
     timeOf[20] = '\0'; // this effectively truncates the c-string
 
-    cout << now; 
-
-    return "nipple";
+    return timeOf;
 
 }
