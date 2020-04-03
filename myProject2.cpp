@@ -16,6 +16,7 @@ This log will be accessible via a password protected system.
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <ctime>
 
 //our namespace includes
 using std::cout;
@@ -25,6 +26,7 @@ using std::right;
 using std::setw;
 using std::endl;
 using std::string;
+using std::to_string;
 
 const float BIKING = 10.0, TREADMILL = 8.0, LIFTING = 3.0, YOGA = 2.5; //declaration and initialization of consts for METs
 
@@ -32,6 +34,8 @@ void printMenu(void);
 int validateRange(int, int, string, string, char);
 float calorieCalculate(int, float);
 string getIntensity(float);
+string genID(void);
+string grabTime(void);
 
 int main()
 {
@@ -55,8 +59,9 @@ while(userChoice != 6)
         calories = calorieCalculate(userChoice, weight);
         intensity = getIntensity(calories);
 
-        cout << calories; 
-        cout << intensity;
+        cout << calories << endl; 
+        cout << intensity << endl;
+        cout << genID() << endl;
     }
 
 
@@ -222,5 +227,66 @@ string getIntensity(float calories)
     };
 
     return intensity; 
+
+}
+
+// genID makes a randomized user ID and will always make sure the ID has 5 characters 
+// Precondition: None 
+// Postcondition: 5 digit ID number 
+
+string genID()
+{
+    string ID;
+
+    int random = rand() % 99999 + 1;
+
+    // add number of zeroes based on how many digits are in random so we have a 5 digit ID number 
+    if(random <= 9)
+    {
+        // 1 digit 
+        ID = "0000" + to_string(random);
+    }
+    else if(random > 9 && random <= 99)
+    {
+        // 2 digits 
+        ID = "000" + to_string(random);
+    }
+    else if(random > 99 && random <= 999)
+    {
+        // 3 digits 
+        ID = "00" + to_string(random);
+    }
+    else if(random > 999 && random <= 9999)
+    {
+        // 4 digits 
+        ID = "0" + to_string(random);
+    }
+    else
+    {
+        // 5 digits 
+        ID = to_string(random);
+    }
+
+    return ID;
+}
+
+// grabTime takes the system time and turns it into a string 
+// Precondition: None 
+// Postcondition: system time as a string 
+
+string grabTime(void)
+{
+    // current date/time based on current system  
+    time_t now = time(0);
+    
+    // convert now to c-string form
+    char* timeOf = ctime(&now);
+    
+    // we want a way to limit the size to be just 20 in length
+    timeOf[20] = '\0'; // this effectively truncates the c-string
+
+    cout << now; 
+
+    return "nipple";
 
 }
