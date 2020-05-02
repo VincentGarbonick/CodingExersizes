@@ -10,7 +10,7 @@
 #include <limits>  // numeric_limits<std::streamsize> for validations
 #include <stdlib.h>
 #include <cstring>
-
+#include <vector>
 // these are declarations - prefer this or std:: prefix
 using std::cout;
 using std::cin;
@@ -414,38 +414,330 @@ void encrypt(void)
 }
 
 
+void addressString(void); 
+void spamCheck(string);
 // TASK 5 CODE
 void
 theStrings()
 {
-
+  // Task A 
   string myString = "a lazy boy is a recliner; a beanbag is not.";
 
-  cout << "Found first \"is\" at position: " << myString.find("is") << endl; 
+  int foundIs = myString.find("is");
+  
+  // finding is 
+  cout << "Found first \"is\" at position: " <<  foundIs << endl; 
+  cout << "Found second \"is\" at position: " << myString.find("is", foundIs + 1 ) << endl;
+  
+  // finding a 
+  cout << "Found first \"a\" at position: " << myString.find("a") << endl;
+  
+  // swapping positions of 2 words 
+  myString = "a beanbag is a recliner; a lazy boy is not.";
+  cout << myString << endl;
 
+  bool findAll = false;
+  int firstFind;
+  firstFind = myString.find('a');
+  cout << "Position: " << firstFind << endl;
+  // find all a  
+  do 
+  {
+
+    
+    
+    if(myString.find('a', firstFind + 1))
+    {
+      firstFind = myString.find('a', firstFind + 1);
+      cout << "Position: " << firstFind << endl; 
+    }
+    else
+    {
+      cout << "Found all instances." << endl;
+      findAll = true;
+    }
+
+
+
+  }while(findAll = false);
+
+  //juxtapose positions 
+  // do stuff 
+
+  //find z 
+  // turns the string into a c string and then hunts for z that way. it's ugly but it works 
+  char findZ[myString.size() + 1];
+  myString.copy(findZ, myString.size() +1);
+
+  findZ[(myString.size()+1)] = '\0'; //append a null terminator 
+  
+  for(int i=0;i<myString.size() +1;i++)
+  {
+    if(findZ[i]=='z')
+    {
+      cout << "Z positioned at: " << i - 1 << endl;
+    }
+
+    }
+  
+  //task B- string address stuff 
+  addressString();
+
+  //task C- spam 
+  spamCheck("100% Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio massa, accumsan eu lorem at, rutrum scelerisque eros. Pellentesque ut tincidunt risus. Nam suscipit interdum orci id venenatis. Maecenas in mollis nunc. Maecenas consequat cursus porta. Sed convallis libero quis erat tristique, accumsan rutrum leo ornare. Donec auctor scelerisque diam eget sodales. Praesent rhoncus faucibus pharetra. Quisque porta mauris eu enim pulvinar, eu rhoncus purus pulvinar. Sed dignissim nisi eu euismod molestie. Fusce neque leo, faucibus nec metus tincidunt, ullamcorper vehicula est. In hac habitasse platea dictumst. Duis tempor posuere metus, eget facilisis nunc. Integer lacinia elementum molestie. Sed lacinia luctus ex fermentum porta. Etiam ullamcorper dui dolor, id hendrerit eros mollis non. ");
   cout << "end of strings" << endl;
   cin.get();
 }
 
+// does address related things as per the task 
+// no pre and post con 
+void addressString()
+{
+  string compadre = "hello";
 
+  cout << "Address of string is: " << &compadre << endl;
+
+  compadre = "goodbye";
+
+  cout << "Address of adjusted string is: " << &compadre << endl;
+}
+
+
+
+
+
+
+// finds common spam words in an inputted file 
+// precon string of words in email  
+// postcon none 
+void spamCheck(string file)
+{
+  int spamCount = 0;
+  string spamList[40] = {
+  "100%"
+  ,"100% free"
+  ,"100% satisfied"
+  ,"50% off"
+  ,"Ad"
+  ,"All New"
+  ,"Bargain"
+  ,"Best Price"
+  ,"Cost"
+  ,"Costs"
+  ,"Credit"
+  ,"Discount"
+  ,"Don’t delete"
+  ,"Email harvest"
+  ,"Email marketing"
+  ,"Fast cash"
+  ,"For free"
+  ,"For instant access"
+  ,"Free"
+  ,"Free and free"
+  ,"Free connsultation"
+  ,"Free dvd"
+  ,"Free gift"
+  ,"Free sample"
+  ,"Free trial"
+  ,"Free website"
+  ,"Gift certificate"
+  ,"Give it away"
+  ,"Giving away"
+  ,"Giving it away"
+  ,"Great"
+  ,"Free and free"
+  ,"Free consultation"
+  ,"Free dvd"
+  ,"Free gift"
+  ,"Free sample"
+  ,"Free trial"
+  ,"Free website"
+  ,"Gift certificate"
+  ,"Give it away"
+  "Great"
+  }; // list of spam phrases 
+
+  
+  for(int i = 0; i< 40; i++)
+  {
+    if(file.find(spamList[i]) != std::string::npos)
+    {
+      spamCount++;
+    }
+  }
+
+  cout << "You have " << spamCount << " spam phrases in your text." << endl;
+
+  if(spamCount > 3)
+  {
+    cout << "This email is likely spam." << endl;
+  }
+  else 
+  {
+    cout << "This email is probably not spam." << endl;
+  }
+
+  return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+std::vector<std::string> process(std::vector<std::string>);
+void vecStat(std::vector<std::string>);
 // TASK 6 CODE
 void
 vectors()
 {
+  std::vector<string> v; 
+  v = process(v);
+
   cout << "end of vectors" << endl;
   cin.get();
 }
+//does vector operations asked in task 6 
+// precon: vector of strings 
+// postcon: edited vector 
+std::vector<std::string> process(std::vector<std::string> v)
+{
+  v.push_back("tomato soup");
+  vecStat(v);
+
+  v.push_back("anonymous");
+  vecStat(v);
+
+  v.insert(v.begin(), "super freak");
+  vecStat(v);
+
+  v.push_back("1234567890abcdefghijklmnopqrstuvwxyz1234567890");
+  vecStat(v);
+
+  v.resize(v.size() + 10);
+  vecStat(v);
+
+  return v;
+}
+// shows size, len, and capacity of vecotr 
+// precon: vector of strings  
+// postcon: none 
+void vecStat(std::vector<std::string> v)
+{
+  // size 
+  cout << v.size() << endl;
+  // length
+  cout << v.max_size() << endl;
+  // capacity
+  cout << v.capacity() << endl;
+
+  return;
+}
+
+
+void pointerPrint(char*);
+void pointerPopulate (int);
+
+double* exchange(float *, float*); 
 // TASK 7 CODE
 void
 pointers()
 {
+    // A 
+  // generates array for task A 
+  char alpha[26];
+  int count = 0;
+  
+  for(int i = 65; i<=90; i++)
+  {
+    alpha[count] = (char)i;
+    count++;
+  }
+
+  pointerPrint(alpha);
+ 
+  /*
+  // B 
+  int * pArr = new int[3];
+  pointerPopulate(*pArr);
+
+  for(int i = 0; i<sizeof(pArr); i++)
+  {
+    cout << pArr[i];
+  }
+  */
+
+ //C 
+
+ //D 
+
+
+
+
   cout << "end of pointers" << endl;
   cin.get();
 }
+
+//prints off array given a pointer 
+// precon array
+// postcon none
+void pointerPrint(char* pArr)
+{
+  for(int x = 0; x < 26; x++)
+  {
+    cout << pArr[x];
+  }
+  cout << "\n";
+  return;
+}
+
+//populates dyanmically heap allocated array 
+// precon heap array
+// postcon heap array populated 
+void pointerPopulate(int arr[])
+{
+  for(int i = 0; i < 3; i++)
+  {
+    arr[i] = 2;
+  }
+  return;
+} 
+
+// multiplies 2 numbers 
+// precon number pointers 
+// postcon multiplied numbers 
+/*
+double* exchange(float *n1, float*n2)
+{
+  double mult = *n1 * (*n2);
+  double * pMult = mult;
+}
+*/
+
+
+
 // TASK 8 CODE
 void
 misc()
 {
+
+
+
   cout << "end of miscellaneous" << endl;
   cin.get();
 }
