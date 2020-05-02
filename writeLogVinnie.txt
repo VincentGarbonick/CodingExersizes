@@ -13,3 +13,9 @@
 39356   Biking   31   72.803   light   Fri May  1 21:45:43 
 54062   Treadmill   31   58.2424   light   Fri May  1 21:45:47 
 42578   Yoga   61   47.3674   light   Fri May  1 21:45:55 
+22615   Biking   31   72.803   light   Fri May  1 21:48:28 
+12615   Treadmill   41   101.879   light   Fri May  1 21:48:32 
+76524   Lifting   16   14.9091   light   Fri May  1 21:48:39 
+39356   Biking   41   96.2879   light   Fri May  1 22:07:30 
+54062   Treadmill   41   77.0303   light   Fri May  1 22:07:34 
+42578   Yoga   61   35.8144   light   Fri May  1 22:07:40 

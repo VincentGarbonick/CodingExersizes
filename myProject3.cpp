@@ -75,6 +75,9 @@ void initArray(int *[]);
 //prints our entire array off (debugging only)
 void printArray(int*[]);
 
+// counts number of nonzero elements in array and returns as an array 
+int countNonzero(int*[], int);
+
 int main()
 {
 
@@ -193,49 +196,17 @@ while(userChoice != 8)
 
     }
     
+    else if(userChoice == 6)
+    {
+        cout << "\n";
+        cout << "Bikes in use/total: " << countNonzero(actArr, 0) << "/" << BIKE_SIZE << endl;
+        cout << "Treadmills in use/total: " << countNonzero(actArr, 1) << "/" << TREADMILL_SIZE << endl;
+        cout << "Weights in use/total: " << countNonzero(actArr, 2) << "/" << WEIGHT_LIFT_SIZE << endl;
+        cout << "Yoga mats in use/total: " << countNonzero(actArr, 3) << "/" << YOGA_SIZE << endl;
+    }
     hitNum++;
 
 }
-
-
-
-/*
-for(int i = 0; i < BIKE_SIZE; i++)
-{
-    cout << actArr[0][i];
-}
-cout << "\n";
-for(int i = 0; i < TREADMILL_SIZE; i++)
-{
-    cout << actArr[1][i];
-}
-cout << "\n";
-for(int i = 0; i < WEIGHT_LIFT_SIZE; i++)
-{
-    cout << actArr[2][i];
-}
-cout << "\n";
-for(int i = 0; i < YOGA_SIZE; i++)
-{
-    cout << actArr[3][i];
-}
-cout << "\n";
-*/
-
-
-
-printArray(actArr);
-
-
-
-
-
-
-
-
-
-
-
 
 return 0;
 }
@@ -622,4 +593,41 @@ void printArray(int*pArr[])
     cout << "\n";
 
     return;
+}
+// counts # of nonzero elements in row of nonzero array
+// PreC: dynamic array of elements, type 
+// postC: number
+int countNonzero(int* pArr[], int type)
+{
+    int nonzeroElm = 0;
+    int size;
+
+    switch(type)
+    {
+
+    case 0:
+        size = BIKE_SIZE;
+        break;
+    case 1: 
+        size = TREADMILL_SIZE;
+        break;
+    case 2: 
+        size = WEIGHT_LIFT_SIZE;
+        break;
+    case 3: 
+        size = YOGA_SIZE;
+        break; 
+    }
+
+    // type is the row of our array, size is the global const of how big it is 
+    for(int i = 0; i < size; i++)
+    {
+        // breaks out early if we don't have a lot of values and still have 0's in the array
+        if(pArr[type][i] == 0)
+        {
+            break;
+        }
+        nonzeroElm++;
+    }
+    return nonzeroElm;
 }
