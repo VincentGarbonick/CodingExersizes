@@ -68,10 +68,13 @@ void fileWriteMinAct(string, string, string, float);
 void fileWriteIntStamp(string, float, string);
 
 void printFile(string);
-void initArray(int*);
+void initArray(int *[]);
 
 // what we use to write to our pointer array
-void writeArray(int, int*);
+void writeArray(int, int*[]);
+
+//prints our entire array off (debugging only)
+void printArray(int*[]);
 
 int main()
 {
@@ -92,9 +95,10 @@ actArr[1] = new int[TREADMILL_SIZE];
 actArr[2] = new int[WEIGHT_LIFT_SIZE];
 actArr[3] = new int[YOGA_SIZE];
 
+// init member arrays 
+initArray(actArr);
 
-
-
+printArray(actArr);
 
 while(userChoice != 8)
 {
@@ -448,6 +452,30 @@ void printFile(string name)
 // initArray initializes the jagged array with 0's 
 // precondition: pointer array 
 // postcondition: none
+void initArray(int *pArr[])
+{   
+    for(int i = 0; i < BIKE_SIZE; i++)
+    {
+        pArr[0][i] = 0;
+    }
+    
+    for(int i = 0; i < TREADMILL_SIZE; i++)
+    {
+        pArr[1][i] = 0;
+    }
+
+    for(int i = 0; i < WEIGHT_LIFT_SIZE; i++)
+    {
+        pArr[2][i] = 0;
+    }
+
+    for(int i = 0; i < YOGA_SIZE; i++)
+    {
+        pArr[3][i] = 0;
+    }
+
+    return;
+}
 
 // writeArray writes the ID to the pointer array
 // precondition: pointer array initialized, this function is called from calculatecalories
@@ -458,4 +486,30 @@ void writeArray(int act, int* pArr[])
     act--;
 
     return;
+}
+
+void printArray(int*pArr[])
+{
+    
+    for(int i = 0; i < BIKE_SIZE; i++)
+    {
+        cout << pArr[3][i];
+    }
+    cout << "\n";
+    for(int i = 0; i < TREADMILL_SIZE; i++)
+    {
+        cout << pArr[3][i];
+    }
+    cout << "\n";
+
+    for(int i = 0; i < WEIGHT_LIFT_SIZE; i++)
+    {
+        cout << pArr[3][i];
+    }
+    cout << "\n";
+
+    for(int i = 0; i < YOGA_SIZE; i++)
+    {
+        cout << pArr[3][i];
+    }
 }
