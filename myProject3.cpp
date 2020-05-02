@@ -135,7 +135,7 @@ while(userChoice != 8)
                     localBikeCount = 0;
                 }
                 calories = calorieCalculate(userChoice, weight, ID, &localBikeCount, actArr);
-
+                localBikeCount++;
             break;
 
             case 2:
@@ -146,7 +146,7 @@ while(userChoice != 8)
                     localTreadCount = 0;
                 }
                 calories = calorieCalculate(userChoice, weight, ID, &localTreadCount, actArr);
-
+                localTreadCount++;
             break; 
 
             case 3:
@@ -157,8 +157,9 @@ while(userChoice != 8)
                     localWeightCount = 0;
                 }
                 calories = calorieCalculate(userChoice, weight, ID, &localWeightCount, actArr);
-
+                localWeightCount++;
             break; 
+
 
             case 4: 
                 if(localYogaCount == BIKE_SIZE)
@@ -168,6 +169,7 @@ while(userChoice != 8)
                 }
                 calories = calorieCalculate(userChoice, weight, ID, &localYogaCount, actArr);
 
+                localYogaCount++;
             break;
         }
         intensity = getIntensity(calories);
@@ -210,7 +212,7 @@ while(userChoice != 8)
     
     else if (userChoice == 7)
     {
-        cout << "Enter user query: ";
+        printArray(actArr);
         userQuery = validateRange(1, 99999, "Please enter an ID between 1 and 99999!", "Enter your user query: ", 'i');
         searchArr(actArr, userQuery);
     }
@@ -322,8 +324,6 @@ float calorieCalculate(int userChoice, float weight, string ID, int *countJagged
     int act = userChoice - 1;
     int position = *countJagged;
 
-    ID = genID();
-
     switch(userChoice)
     {
         case 1: 
@@ -369,7 +369,7 @@ float calorieCalculate(int userChoice, float weight, string ID, int *countJagged
 
     }
 
-    *countJagged++;
+
     return calories;
 
 }
@@ -669,8 +669,8 @@ void searchArr(int* pArr[], int search)
         
         if(pArr[0][i] == search)
         {
-            findFlag == true;
-            cout << "Found user: " << pArr[0][i] << " at bike " << i << endl;
+            findFlag = true;
+            cout << "Found user: " << pArr[0][i] << " at bike " << i + 1 << endl;
             break;
         }
     }
@@ -689,8 +689,8 @@ void searchArr(int* pArr[], int search)
         
         if(pArr[1][i] == search)
         {
-            findFlag == true;
-            cout << "Found user: " << pArr[1][i] << " at treadmill " << i << endl;
+            findFlag = true;
+            cout << "Found user: " << pArr[1][i] << " at treadmill " << i +1 << endl;
 
             break;
         }
@@ -710,8 +710,8 @@ void searchArr(int* pArr[], int search)
 
         if(pArr[2][i] == search)
         {
-            findFlag == true;
-            cout << "Found user: " << pArr[2][i] << " at weight rack " << i << endl;
+            findFlag = true;
+            cout << "Found user: " << pArr[2][i] << " at weight rack " << i +1 << endl;
 
             break;
         }
@@ -731,8 +731,8 @@ void searchArr(int* pArr[], int search)
 
         if(pArr[3][i] == search)
         {
-            findFlag == true;
-            cout << "Found user: " << pArr[3][i] << " at yoga mat " << i << endl;
+            findFlag = true;
+            cout << "Found user: " << pArr[3][i] << " at yoga mat " << i + 1 << endl;
 
             break;
         }
