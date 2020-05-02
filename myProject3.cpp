@@ -78,10 +78,13 @@ void printArray(int*[]);
 // counts number of nonzero elements in array and returns as an array 
 int countNonzero(int*[], int);
 
+// searches the array for the number of your choice. says where they are and what activity they are doing 
+void searchArr(int*[], int);
+
 int main()
 {
 
-int userChoice, hitNum = 0; 
+int userChoice, hitNum = 0, userQuery; 
 float weight, minutes, calories; 
 string intensity, ID, enteredPassword;  //how intesnse our exersize was 
 
@@ -203,6 +206,13 @@ while(userChoice != 8)
         cout << "Treadmills in use/total: " << countNonzero(actArr, 1) << "/" << TREADMILL_SIZE << endl;
         cout << "Weights in use/total: " << countNonzero(actArr, 2) << "/" << WEIGHT_LIFT_SIZE << endl;
         cout << "Yoga mats in use/total: " << countNonzero(actArr, 3) << "/" << YOGA_SIZE << endl;
+    }
+    
+    else if (userChoice == 7)
+    {
+        cout << "Enter user query: ";
+        userQuery = validateRange(1, 99999, "Please enter an ID between 1 and 99999!", "Enter your user query: ", 'i');
+        searchArr(actArr, userQuery);
     }
     hitNum++;
 
@@ -548,7 +558,10 @@ void initArray(int *pArr[])
     return;
 }
 
-
+//FOR TESTING ONLY! 
+// prints out all elements in array 
+// precon: pointer to dynamic array
+// postcon: none 
 void printArray(int*pArr[])
 {
     
@@ -630,4 +643,104 @@ int countNonzero(int* pArr[], int type)
         nonzeroElm++;
     }
     return nonzeroElm;
+}
+
+// searches the array for the number of your choice. says where they are and what activity they are doing 
+// precon: array, number to hunt for 
+// postcon: none
+void searchArr(int* pArr[], int search)
+{
+
+    bool findFlag = false; 
+
+
+
+
+
+    for(int i = 0; i < BIKE_SIZE; i++)
+    {
+        // breaks out early if we don't have a lot of values and still have 0's in the arra, 
+        // also breaks out of later find loops if findFlag is true already, which means we found the value 
+
+        if(pArr[0][i] == 0)
+        {
+            break;
+        }
+        
+        if(pArr[0][i] == search)
+        {
+            findFlag == true;
+            cout << "Found user: " << pArr[0][i] << " at bike " << i << endl;
+            break;
+        }
+    }
+
+    for(int i = 0; i < TREADMILL_SIZE; i++)
+    {
+        if(findFlag == true)
+        {
+            break;
+        }
+        
+        if(pArr[1][i] == 0)
+        {
+            break;
+        }
+        
+        if(pArr[1][i] == search)
+        {
+            findFlag == true;
+            cout << "Found user: " << pArr[1][i] << " at treadmill " << i << endl;
+
+            break;
+        }
+    }
+
+    for(int i = 0; i < WEIGHT_LIFT_SIZE; i++)
+    {
+        if(findFlag == true)
+        {
+            break;
+        }
+
+        if(pArr[2][i] == 0)
+        {
+            break;
+        }
+
+        if(pArr[2][i] == search)
+        {
+            findFlag == true;
+            cout << "Found user: " << pArr[2][i] << " at weight rack " << i << endl;
+
+            break;
+        }
+    }
+
+    for(int i = 0; i < YOGA_SIZE; i++)
+    {
+        if(findFlag == true)
+        {
+            break;
+        }
+       
+        if(pArr[3][i] == 0)
+        {
+            break;
+        }
+
+        if(pArr[3][i] == search)
+        {
+            findFlag == true;
+            cout << "Found user: " << pArr[3][i] << " at yoga mat " << i << endl;
+
+            break;
+        }
+    }
+
+    if(findFlag == false)
+    {
+        cout << "Could not find user." << endl;
+    }
+    return;
 }
