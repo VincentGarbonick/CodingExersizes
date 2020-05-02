@@ -1,2 +1,15 @@
 39356   Treadmill   31   751.515   heavy   Fri Apr  3 17:39:54 
 54062   Biking   40   909.091   heavy   Fri Apr  3 17:40:02 
+39356   Biking   31   2.34848   light   Fri May  1 21:10:12 
+39356   Treadmill   31   375.758   moderate   Fri May  1 21:10:51 
+39356   Lifting   16   11.2727   light   Fri May  1 21:11:57 
+39356   Biking   51   119.773   light   Fri May  1 21:38:39 
+54062   Biking   31   72.803   light   Fri May  1 21:38:57 
+39356   Biking   31   72.803   light   Fri May  1 21:39:57 
+39356   Biking   31   72.803   light   Fri May  1 21:40:41 
+54062   Biking   31   72.803   light   Fri May  1 21:40:43 
+39356   Biking   31   72.803   light   Fri May  1 21:42:08 
+54062   Biking   31   72.803   light   Fri May  1 21:42:10 
+39356   Biking   31   72.803   light   Fri May  1 21:45:43 
+54062   Treadmill   31   58.2424   light   Fri May  1 21:45:47 
+42578   Yoga   61   47.3674   light   Fri May  1 21:45:55 

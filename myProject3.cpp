@@ -51,7 +51,7 @@ const int ACTIVITY_SIZES[NUMACTS] = {19, 15, 24, 33};
 
 void printMenu(void); 
 int validateRange(int, int, string, string, char);
-float calorieCalculate(int, float, string,int*);
+float calorieCalculate(int, float, string, int*,int*[]);
 string getIntensity(float);
 string genID(void);
 char* grabTime(void);
@@ -70,8 +70,7 @@ void fileWriteIntStamp(string, float, string);
 void printFile(string);
 void initArray(int *[]);
 
-// what we use to write to our pointer array
-void writeArray(int, int*[], int, int);
+
 
 //prints our entire array off (debugging only)
 void printArray(int*[]);
@@ -101,10 +100,7 @@ actArr[1] = new int[TREADMILL_SIZE];
 actArr[2] = new int[WEIGHT_LIFT_SIZE];
 actArr[3] = new int[YOGA_SIZE];
 
-// init member arrays 
-initArray(actArr);
 
-//printArray(actArr);
 
 while(userChoice != 8)
 {
@@ -132,7 +128,7 @@ while(userChoice != 8)
                     cout << "Bikes full! Kicking first user out!" << endl;
                     localBikeCount = 0;
                 }
-                calories = calorieCalculate(userChoice, weight, ID, &localBikeCount);
+                calories = calorieCalculate(userChoice, weight, ID, &localBikeCount, actArr);
 
             break;
 
@@ -143,7 +139,7 @@ while(userChoice != 8)
                     cout << "Treads full! Kicking first user out!" << endl;
                     localTreadCount = 0;
                 }
-                calories = calorieCalculate(userChoice, weight, ID, &localTreadCount);
+                calories = calorieCalculate(userChoice, weight, ID, &localTreadCount, actArr);
 
             break; 
 
@@ -154,7 +150,7 @@ while(userChoice != 8)
                     cout << "Gym is full! Kicking the first DYEL user out!" << endl;
                     localWeightCount = 0;
                 }
-                calories = calorieCalculate(userChoice, weight, ID, &localWeightCount);
+                calories = calorieCalculate(userChoice, weight, ID, &localWeightCount, actArr);
 
             break; 
 
@@ -164,7 +160,7 @@ while(userChoice != 8)
                     cout << "Yoga full! Kicking first user/hippie out!" << endl;
                     localYogaCount = 0;
                 }
-                calories = calorieCalculate(userChoice, weight, ID, &localYogaCount);
+                calories = calorieCalculate(userChoice, weight, ID, &localYogaCount, actArr);
 
             break;
         }
@@ -199,8 +195,48 @@ while(userChoice != 8)
     
     hitNum++;
 
-
 }
+
+
+
+/*
+for(int i = 0; i < BIKE_SIZE; i++)
+{
+    cout << actArr[0][i];
+}
+cout << "\n";
+for(int i = 0; i < TREADMILL_SIZE; i++)
+{
+    cout << actArr[1][i];
+}
+cout << "\n";
+for(int i = 0; i < WEIGHT_LIFT_SIZE; i++)
+{
+    cout << actArr[2][i];
+}
+cout << "\n";
+for(int i = 0; i < YOGA_SIZE; i++)
+{
+    cout << actArr[3][i];
+}
+cout << "\n";
+*/
+
+
+
+printArray(actArr);
+
+
+
+
+
+
+
+
+
+
+
+
 return 0;
 }
 
@@ -298,10 +334,12 @@ Precondition:
 Postcondition: 
                 - calories expended  
 */
-float calorieCalculate(int userChoice, float weight, string ID, int *countJagged)
+float calorieCalculate(int userChoice, float weight, string ID, int *countJagged, int*pArr[])
 {
 
     float calories, minutes;
+    int act = userChoice - 1;
+    int position = *countJagged;
 
     ID = genID();
 
@@ -311,8 +349,9 @@ float calorieCalculate(int userChoice, float weight, string ID, int *countJagged
 
             minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked while biking: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
-            writeArray(userChoice, )
             
+            pArr[act][position] = stoi(ID);
+
             fileWriteMinAct(FILENAME, ID, "Biking", minutes);
             break;
 
@@ -321,6 +360,9 @@ float calorieCalculate(int userChoice, float weight, string ID, int *countJagged
             minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked on treadmill: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * TREADMILL * weight / 2.2; //calculates calories burnt 
 
+            pArr[act][position] = stoi(ID);
+
+
             fileWriteMinAct(FILENAME, ID, "Treadmill", minutes);
             break;
 
@@ -328,6 +370,8 @@ float calorieCalculate(int userChoice, float weight, string ID, int *countJagged
             
             minutes = validateRange(15, 30, "Enter minutes between 15 and 30. \n", "Enter minutes worked lifting: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * LIFTING * weight / 2.2; //calculates calories burnt 
+            
+            pArr[act][position] = stoi(ID);
 
             fileWriteMinAct(FILENAME, ID, "Lifting", minutes);
             break;
@@ -337,11 +381,14 @@ float calorieCalculate(int userChoice, float weight, string ID, int *countJagged
             minutes = validateRange(60, 90, "Enter minutes between 60 and 90. \n", "Enter minutes worked doing yoga: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * YOGA * weight / 2.2; //calculates calories burnt 
 
+            pArr[act][position] = stoi(ID);
+
             fileWriteMinAct(FILENAME, ID, "Yoga", minutes);
             break;
 
     }
 
+    *countJagged++;
     return calories;
 
 }
@@ -510,7 +557,7 @@ void initArray(int *pArr[])
 {   
     for(int i = 0; i < BIKE_SIZE; i++)
     {
-        pArr[0][i] = 0;
+        pArr[0][i] = 2;
     }
     
     for(int i = 0; i < TREADMILL_SIZE; i++)
@@ -527,44 +574,52 @@ void initArray(int *pArr[])
     {
         pArr[3][i] = 0;
     }
-
     return;
 }
 
-// writeArray writes the ID to the pointer array
-// precondition: pointer array initialized, this function is called from calculatecalories, also needs a position from counting variables, and needs ID 
-// postcondition: written pointer array
-void writeArray(int act, int* pArr[], int position, int ID)
-{
-    //since this is valid data we can trust, the user activity can automatically be decremented 
-    act--;
-    pArr[act][position];
-
-    return;
-}
 
 void printArray(int*pArr[])
 {
     
     for(int i = 0; i < BIKE_SIZE; i++)
     {
-        cout << pArr[3][i];
+        // breaks out early if we don't have a lot of values and still have 0's in the array
+        if(pArr[0][i] == 0)
+        {
+            break;
+        }
+        cout << pArr[0][i] << " ";
     }
     cout << "\n";
     for(int i = 0; i < TREADMILL_SIZE; i++)
     {
-        cout << pArr[3][i];
+        if(pArr[1][i] == 0)
+        {
+            break;
+        }
+        cout << pArr[1][i] << " ";
     }
     cout << "\n";
 
     for(int i = 0; i < WEIGHT_LIFT_SIZE; i++)
     {
-        cout << pArr[3][i];
+        if(pArr[2][i] == 0)
+        {
+            break;
+        }
+        cout << pArr[2][i] << " ";
     }
     cout << "\n";
 
     for(int i = 0; i < YOGA_SIZE; i++)
     {
-        cout << pArr[3][i];
+        if(pArr[3][i] == 0)
+        {
+            break;
+        }
+        cout << pArr[3][i] << " ";
     }
+    cout << "\n";
+
+    return;
 }
