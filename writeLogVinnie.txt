@@ -80,3 +80,9 @@
 94607   Treadmill   31   58.2424   light   Fri May  1 22:54:25 
 87541   Treadmill   31   58.2424   light   Fri May  1 22:54:39 
 93907   Treadmill   31   58.2424   light   Fri May  1 22:54:45 
+07427   Biking   31   72.803   light   Fri May  1 23:15:31 
+07427   Treadmill   31   58.2424   light   Fri May  1 23:16:27 
+39356   Biking   31   72.803   light   Fri May  1 23:16:29 
+39356   Biking   31   72.803   light   Fri May  1 23:17:34 
+07427   Biking   31   72.803   light   Fri May  1 23:18:21 
+54062   Yoga   61   35.8144   light   Fri May  1 23:18:43 

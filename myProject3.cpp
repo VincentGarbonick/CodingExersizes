@@ -106,7 +106,7 @@ actArr[1] = new int[TREADMILL_SIZE];
 actArr[2] = new int[WEIGHT_LIFT_SIZE];
 actArr[3] = new int[YOGA_SIZE];
 
-
+initArray(actArr);
 
 while(userChoice != 8)
 {
@@ -212,7 +212,7 @@ while(userChoice != 8)
     
     else if (userChoice == 7)
     {
-        printArray(actArr);
+       // printArray(actArr);
         userQuery = validateRange(1, 99999, "Please enter an ID between 1 and 99999!", "Enter your user query: ", 'i');
         searchArr(actArr, userQuery);
     }
@@ -538,7 +538,7 @@ void initArray(int *pArr[])
 {   
     for(int i = 0; i < BIKE_SIZE; i++)
     {
-        pArr[0][i] = 2;
+        pArr[0][i] = 0;
     }
     
     for(int i = 0; i < TREADMILL_SIZE; i++)
