@@ -51,7 +51,7 @@ const int ACTIVITY_SIZES[NUMACTS] = {19, 15, 24, 33};
 
 void printMenu(void); 
 int validateRange(int, int, string, string, char);
-float calorieCalculate(int, float, string);
+float calorieCalculate(int, float, string,int*);
 string getIntensity(float);
 string genID(void);
 char* grabTime(void);
@@ -71,7 +71,7 @@ void printFile(string);
 void initArray(int *[]);
 
 // what we use to write to our pointer array
-void writeArray(int, int*[]);
+void writeArray(int, int*[], int, int);
 
 //prints our entire array off (debugging only)
 void printArray(int*[]);
@@ -86,6 +86,12 @@ string intensity, ID, enteredPassword;  //how intesnse our exersize was
 // initialize file
 fileInit(FILENAME);
 
+// counting varaibles so we can reset our array if we fill it up all the way
+int localBikeCount = 0;
+int localTreadCount = 0;
+int localWeightCount = 0; 
+int localYogaCount = 0;
+
 // intialize jagged array
 int *actArr[NUMACTS];
 
@@ -98,7 +104,7 @@ actArr[3] = new int[YOGA_SIZE];
 // init member arrays 
 initArray(actArr);
 
-printArray(actArr);
+//printArray(actArr);
 
 while(userChoice != 8)
 {
@@ -115,7 +121,53 @@ while(userChoice != 8)
     if(userChoice != 5 && userChoice != 6 && userChoice !=7 && userChoice != 8)
     {
         weight = validateRange(1, 999, "Enter a weight from 0 - 999", "Enter your weight: ", 'f');
-        calories = calorieCalculate(userChoice, weight, ID);
+
+        // picks what address we need to send to calorieCalculate so we can properly update our local counting varaibles for the jagged array
+        switch(userChoice)
+        {
+            case 1:
+
+                if(localBikeCount == BIKE_SIZE)
+                {
+                    cout << "Bikes full! Kicking first user out!" << endl;
+                    localBikeCount = 0;
+                }
+                calories = calorieCalculate(userChoice, weight, ID, &localBikeCount);
+
+            break;
+
+            case 2:
+
+                if(localTreadCount == TREADMILL_SIZE)
+                {
+                    cout << "Treads full! Kicking first user out!" << endl;
+                    localTreadCount = 0;
+                }
+                calories = calorieCalculate(userChoice, weight, ID, &localTreadCount);
+
+            break; 
+
+            case 3:
+
+                if(localWeightCount == WEIGHT_LIFT_SIZE)
+                {
+                    cout << "Gym is full! Kicking the first DYEL user out!" << endl;
+                    localWeightCount = 0;
+                }
+                calories = calorieCalculate(userChoice, weight, ID, &localWeightCount);
+
+            break; 
+
+            case 4: 
+                if(localYogaCount == BIKE_SIZE)
+                {
+                    cout << "Yoga full! Kicking first user/hippie out!" << endl;
+                    localYogaCount = 0;
+                }
+                calories = calorieCalculate(userChoice, weight, ID, &localYogaCount);
+
+            break;
+        }
         intensity = getIntensity(calories);
 
         fileWriteIntStamp(FILENAME, calories, intensity);
@@ -240,12 +292,13 @@ Use: calculates caloric expendature based on passed parameters
 Precondition: 
                 - pass userInput 1-4
                 - pass weight 
+                - pass array of counting variables to make life easy
 
 
 Postcondition: 
                 - calories expended  
 */
-float calorieCalculate(int userChoice, float weight, string ID)
+float calorieCalculate(int userChoice, float weight, string ID, int *countJagged)
 {
 
     float calories, minutes;
@@ -258,6 +311,7 @@ float calorieCalculate(int userChoice, float weight, string ID)
 
             minutes = validateRange(30, 60, "Enter minutes between 30 and 60. \n", "Enter minutes worked while biking: ", 'i'); //gets our minutes, casts our float minutes to int in function
             calories = minutes / 60 * BIKING * weight / 2.2; //calculates calories burnt 
+            writeArray(userChoice, )
             
             fileWriteMinAct(FILENAME, ID, "Biking", minutes);
             break;
@@ -478,12 +532,13 @@ void initArray(int *pArr[])
 }
 
 // writeArray writes the ID to the pointer array
-// precondition: pointer array initialized, this function is called from calculatecalories
+// precondition: pointer array initialized, this function is called from calculatecalories, also needs a position from counting variables, and needs ID 
 // postcondition: written pointer array
-void writeArray(int act, int* pArr[])
+void writeArray(int act, int* pArr[], int position, int ID)
 {
     //since this is valid data we can trust, the user activity can automatically be decremented 
     act--;
+    pArr[act][position];
 
     return;
 }
